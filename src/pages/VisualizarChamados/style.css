@@ -1,0 +1,87 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.row{
+    display: flex;  
+    align-items: flex-start;
+    flex-grow: 1;
+    justify-content: flex-start;
+    flex-direction: row;
+    margin: auto;
+    max-width: 800px;
+    
+}
+
+.col{
+    flex: 1;
+    justify-items: center;
+    width: 100%;
+    min-width: 250px;
+}
+
+.tilt{
+    font-size: 24px;
+}
+
+.parag{
+    font-size: 18px;
+}
+
+.tiltLists{
+
+    display: flex;
+    align-items: baseline;
+    margin: 0 0 1rem;
+    color: rgb(70 70 70);
+
+}
+
+.criarStatus{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;    
+    flex: 0;   
+}
+
+.criarStatus label{
+    padding-right: 5px;
+}
+
+#filtro{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.2);
+
+    #opsfiltro{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+    }
+}
+
+#view{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.2);
+
+    #opsview{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+    }
+}
+

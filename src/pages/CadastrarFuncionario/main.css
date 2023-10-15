@@ -1,0 +1,20 @@
+.divContainerPrincipal{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: white;
+}
+
+/*fim Labels*/
+
+.inputdata {
+    width: 100%;
+    height: 30px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding-left: 10px;
+    margin-top: 10px; 
+}
