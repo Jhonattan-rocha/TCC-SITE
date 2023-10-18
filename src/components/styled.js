@@ -8,7 +8,7 @@ export const DivPopUp = styled.div`
     background-color: #fff;
     border: 1px solid #ccc;
     padding: 20px;
-    z-index: 5;
+    z-index: 9;
     border-radius: 10px;
 `;
 
@@ -19,7 +19,7 @@ export const DivOverLay = styled.div`
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 3;
+    z-index: 8;
 `;
 
 
@@ -43,14 +43,14 @@ export const Dropzone = styled.div`
 export const ImgPreview = styled.div`
     border: 1px dashed black;
     border-radius: 50%;
-    height: ${props => props.small ? `${props.small.container}px` :'150px'};
-    width: ${props => props.small ? `${props.small.container}px` :'150px'};
+    height: ${props => props.size ? `${props.size.container}px` :'150px'};
+    width: ${props => props.size ? `${props.size.container}px` :'150px'};
     overflow: hidden;
     cursor: pointer;
 
     img{
-        height: ${props => props.small ? `${props.small.img}px`:'200px'};
-        width: ${props => props.small ? `${props.small.img}px`:'200px'};
+        height: ${props => props.size ? `${props.size.img}px`:'200px'};
+        width: ${props => props.size ? `${props.size.img}px`:'200px'};
         border-radius: 50%;
         position: relative;
         top: 50%;
@@ -94,4 +94,15 @@ export const slideOut = keyframes`
   to {
     width: 0;
   }
+`;
+
+export const SubHeaderContainer = styled.div`
+    width: 100%;
+    height: 140px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 0 70px;
 `;

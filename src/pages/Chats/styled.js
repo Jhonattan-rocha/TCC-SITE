@@ -3,13 +3,14 @@ import * as colors from '../../config/colors';
 
 export const Divhome = styled.div`
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
-    flex-direction: column;
+    flex-direction: row;
     background-color: white;
     width: 100%;
-    height: 100%;
+    height: 85%;
     border-radius: 10px;
+    padding-left: 60px;
 `;
 
 export const DivListaDeChamados = styled.div`
@@ -18,8 +19,9 @@ export const DivListaDeChamados = styled.div`
     justify-content: center;
     flex-direction: column;
     background-color: white;
-    width: 80%;
-    height: fit-content;
+    width: 30%;
+    min-width: 300px;
+    height: 100%;
     border: 1px solid rgba(0,0,0,0.3);
     border-radius: 10px;
 
@@ -75,12 +77,12 @@ export const DivChat = styled.div`
 
 export const DivDados = styled.div`
     display: flex;
-    align-items: center;
-    justify-content: space-around;
+    align-items: flex-start;
+    justify-content: flex-start;
     flex-direction: row;
     width: 100%;
-    min-height: 40px;
-    max-height: 40px;
+    min-height: 70px;
+    max-height: 70px;
     border: 1px solid ${colors.azulescuro};
     border-radius: 10px;
     
@@ -118,6 +120,34 @@ export const DivChatTitle = styled.div`
 
     p{
         font-size: 16px;
+    }
+`;
+
+export const DivSearch = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    width: 100%;
+    height: 60px;
+    padding: 20px 20px;
+`;
+
+export const DivInputSearch = styled.div`
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 5px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    input{
+        border-radius: 10px;
+        border: none;
+        padding: 5px;
+        width: 100%;
     }
 `;
 

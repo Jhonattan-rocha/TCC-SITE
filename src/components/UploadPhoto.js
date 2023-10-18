@@ -7,7 +7,7 @@ import axios from 'axios';
 import { baseURL, ApiPort, SocketPort } from '../config/appConfig';
 
 
-const UploadPhoto = ({filter = "", file_name = "", setImg = () => {}, change = true, apiDownload = true, socketDownload = false, small={container: 150, img: 200}}) => {
+const UploadPhoto = ({filter = "", file_name = "", setImg = () => {}, change = true, apiDownload = true, socketDownload = false, size={container: 150, img: 200}}) => {
   const [uploadedImage, setUploadedImage] = useState(null);
   const [View, setView] = useState(false);
   const user = useSelector(state => state.authreducer);
@@ -88,37 +88,38 @@ const UploadPhoto = ({filter = "", file_name = "", setImg = () => {}, change = t
   }, []);
 
   return (
-    <UploadContainer>
+      <>
         {View ? 
-            <DivPopUp style={{display: 'flex', alignItems: 'flex-end', flexDirection: 'column'}}>
-                <AiOutlineClose onClick={() => setView(false)} cursor={'pointer'} size={30}></AiOutlineClose>
-                <img src={uploadedImage} alt="Imagem do usuário" style={{flex: 1, maxWidth: '100%', maxHeight: '100%'}}></img>
-            </DivPopUp>
-        : null}
-
-        <ImgPreview small={small} onClick={() => {
-            if(uploadedImage){
-                setView(true)
-            }
-        }}>
-            {uploadedImage && <img src={uploadedImage} alt="Imagem do usuário" />}
-        </ImgPreview>
-        {change ?
-            <UploadControl
-                accept=".jpeg,.jpg,.doc,.docx,.pdf,.txt,.png"
-                onChange={(e) => {
-                let files = e.target.files;
-                setImg(files[0]);
-                let blob = new Blob([files[0]], { type: 'application/octet-stream' });
-                let imageUrl = URL.createObjectURL(blob); // Converter o Blob em URL
-    
-                setUploadedImage(imageUrl); // Definir o URL da imagem
-                }}
-            >
-                <AiFillCamera></AiFillCamera>
-            </UploadControl>
-        : null}
-    </UploadContainer>
+        <DivPopUp style={{display: 'flex', alignItems: 'flex-end', flexDirection: 'column'}}>
+            <AiOutlineClose onClick={() => setView(false)} cursor={'pointer'} size={30}></AiOutlineClose>
+            <img src={uploadedImage} alt="Imagem do usuário" style={{flex: 1, maxWidth: '100%', maxHeight: '100%'}}></img>
+        </DivPopUp>
+      : null} 
+        <UploadContainer>
+            <ImgPreview size={size} onClick={() => {
+                if(uploadedImage){
+                    setView(true)
+                }
+            }}>
+                {uploadedImage && <img src={uploadedImage} alt="Imagem do usuário" />}
+            </ImgPreview>
+            {change ?
+                <UploadControl
+                    accept=".jpeg,.jpg,.doc,.docx,.pdf,.txt,.png"
+                    onChange={(e) => {
+                    let files = e.target.files;
+                    setImg(files[0]);
+                    let blob = new Blob([files[0]], { type: 'application/octet-stream' });
+                    let imageUrl = URL.createObjectURL(blob); // Converter o Blob em URL
+        
+                    setUploadedImage(imageUrl); // Definir o URL da imagem
+                    }}
+                >
+                    <AiFillCamera></AiFillCamera>
+                </UploadControl>
+            : null}
+        </UploadContainer>
+    </>
   );
 };
 
