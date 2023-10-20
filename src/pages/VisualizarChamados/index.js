@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as actions from '../../store/modules/chamadosreducer/actions';
 import CalendarComponent from "./components/Calendario";
 import ColumnComponent from './components/Column';
+import SubHeader from "../../components/SubHeader";
 
 export default function VisualizarChamados(){
     // dispara eventos do redux, usa no reducer para fazer alterações no estado de acordo coma a ação
@@ -29,30 +30,17 @@ export default function VisualizarChamados(){
     }, [iduser, dispatch, filtroChamados])
 
     return (
-        <>
             <Container>
+                    <SubHeader></SubHeader>
+                    <select id="filtro" value={filtroChamados} onChange={(e) => setFiltroChamados(e.target.value)}>
+                            <option value="my">Meus Chamados</option>
+                            <option value="other">Chamado dos outros</option>
+                            <option value="any">Qualquer um</option>
+                    </select>
                     <Forms>
-                            <Legend>
-                                Meus Chamados
-                            </Legend>
-                            <select id="filtro" value={filtroChamados} onChange={(e) => setFiltroChamados(e.target.value)}>
-                                    <option value="my">Meus Chamados</option>
-                                    <option value="other">Chamado dos outros</option>
-                                    <option value="any">Qualquer um</option>
-                            </select>
-                            <select id="view" value={view} onChange={(e) => setView(e.target.value)}>
-                                    <option value="column">Coluna</option>
-                                    <option value="calendar">Calendario</option>
-                            </select>
-
-                            {view.match('column') ? 
-                                <ColumnComponent></ColumnComponent>
-                            : view.match('calendar') ? 
-                                <CalendarComponent></CalendarComponent>
-                            : null}
+                        <CalendarComponent></CalendarComponent>
                     </Forms>
             </Container>
-        </>
     );
 }
 

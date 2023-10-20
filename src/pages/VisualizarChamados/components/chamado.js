@@ -5,7 +5,7 @@ import * as actions from '../../../store/modules/chamadosreducer/actions';
 import { useDispatch } from "react-redux";
 import { edit } from './editarchamado';
 
-export default function Chamado(props){
+export default function Chamado({chamado, status}){
 
     const dispatch = useDispatch()
     const [editar, setEditar] = React.useState(false);
@@ -21,19 +21,19 @@ export default function Chamado(props){
 
     return (
         <div style={{width: '100%'}}>
-            {editar ? edit(setEditar, props.chamado) : null}        
-            <DraggableItemStyled handleDragStart={(e) => handleDragStart(e, props.chamado)}>
+            {editar ? edit(setEditar, chamado) : null}        
+            <DraggableItemStyled handleDragStart={(e) => handleDragStart(e, chamado)}>
                 <DivChamado>
                     <div id="title">
-                        <label>{props.status}</label>
+                        <label>{status}</label>
                     </div>
                     <div className="contexto" >
-                        <label>{props.chamado.causa}</label>  
-                        <label>{props.chamado.operador}</label>
+                        <label>{chamado.causa}</label>  
+                        <label>{chamado.operador}</label>
                     </div>
                     <div className="icons">
                         <FaEdit onClick={() => setEditar(!editar)}></FaEdit>
-                        <FaTrash onClick={ (e) => handleClick(e, props.chamado.id)}></FaTrash>
+                        <FaTrash onClick={ (e) => handleClick(e, chamado.id)}></FaTrash>
                     </div>
                 </DivChamado>
             </DraggableItemStyled>     

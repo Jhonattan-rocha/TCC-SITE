@@ -2,20 +2,17 @@ import styled from "styled-components";
 import DropArea from "../../components/DragArea";
 
 
-export const Forms = styled.form`
+export const Forms = styled.div`
     background-color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     height: 100%;
-    position: relative;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
     border-radius: 20px;
     overflow: hidden;
     z-index: 0;
+    padding-left: 60px;
 `;
 
 export const Legend = styled.legend`

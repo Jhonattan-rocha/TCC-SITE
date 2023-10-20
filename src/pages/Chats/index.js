@@ -70,9 +70,8 @@ export default function Chats(props) {
           {chat !== null ? 
             <DivChat>
               <DivChatTitle onClick={() => setOpenConfig(!openConfig)}>
-                <UploadPhoto size={{container: 70, img: 120}} change={false} file_name={profile} apiDownload={false} socketDownload={String(profile).length > 0}></UploadPhoto>
+                <UploadPhoto preView={false} size={{container: 70, img: 120}} change={false} file_name={profile} apiDownload={false} socketDownload={String(profile).length > 0}></UploadPhoto>
                 <p>{chat.titulo}</p>
-                <AiOutlineBars size={40}></AiOutlineBars>
               </DivChatTitle>
               <Chat chat={chat} close={setChat}></Chat>
             </DivChat>

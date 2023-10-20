@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { ContainerCalendar, ContainerChamado, ContainerChamados, ContainerPrincipal, ContainerTitle, DayContainer, TextContainer, TextDayCalendar, TextQtdChamado, TitleMain } from "./styled";
-import { AiOutlineStepBackward, AiOutlineStepForward } from "react-icons/ai";
+import { ContainerCalendar, ContainerCalendarChamados, ContainerChamados, ContainerPrincipalCalendario, ContainerTitle, DayContainer, TextContainer, TextDayCalendar, TitleMonth } from "./styled";
+import { AiFillCheckCircle, AiOutlineStepBackward, AiOutlineStepForward } from "react-icons/ai";
 import * as actions from '../../../store/modules/chamadosreducer/actions';
 import Chamado from "./chamado";
 
@@ -12,9 +12,9 @@ function CalendarComponent(props) {
   
   const user = useSelector(state => state.authreducer);
   const dispatch = useDispatch();
-  const chamadoslist = useSelector(state => state.chamadosreducer.chamados.result) || [];
-  const statuslist = useSelector(state => state.chamadosreducer.status.result || []);
-
+  const chamadoslist = useSelector(state => state.chamadosreducer.chamados.result) ?? [];
+  const statuslist = useSelector(state => state.chamadosreducer.status.result) ?? [];
+  const [chamadosMostrar, setChamadosMostrar] = React.useState([]);
 
   const handleDrop = (event, data) => {
     event.preventDefault();
@@ -85,19 +85,12 @@ function CalendarComponent(props) {
         if(Number(dia) === Number(day) && Number(mes) === Number(month) && Number(ano) === Number(year)){
             return chamados
         }
-      }) || []
+      }) ?? []
 
       calendarDays.push(
-        <DayContainer key={i}>
+        <DayContainer key={i} onClick={() => setChamadosMostrar(chamadosfiltrados)}>
           <TextContainer handleDrop={(e) => handleDrop(e, date)} handleDragOver={handleDragOver}>
               <TextDayCalendar>{day}</TextDayCalendar>
-              <TextQtdChamado>{chamadosfiltrados.length}</TextQtdChamado>
-              <TextQtdChamado>Chamados</TextQtdChamado>
-              <ContainerChamados>
-                {chamadosfiltrados.map(ch => (
-                    <Chamado chamado={ch} status={statuslist.find(st => st.id === ch.id) ? statuslist.find(st => st.id === ch.id).nome: ""} key={ch.id}></Chamado>
-                ))}
-              </ContainerChamados>
           </TextContainer>
         </DayContainer>
       );
@@ -107,21 +100,33 @@ function CalendarComponent(props) {
   };
 
   return (
-    <ContainerPrincipal>
-        <ContainerTitle>
-          <div onClick={handlePreviousMonth}>
-            <AiOutlineStepBackward size={30} color="#000" cursor='pointer'/>
+    <ContainerPrincipalCalendario>
+        <ContainerCalendarChamados>
+          <div>
+              <ContainerTitle>
+              <div onClick={handlePreviousMonth}>
+                <AiOutlineStepBackward size={30} color="#000" cursor='pointer'/>
+              </div>
+              <span style={{color: 'black'}}>{currentDate.getFullYear()} </span>
+              <TitleMonth>{getMonthName(monthMain)}</TitleMonth>
+              <div onClick={handleNextMonth}>
+                <AiOutlineStepForward size={30} color="#000" cursor='pointer'/>
+              </div>
+              </ContainerTitle>
+              <ContainerCalendar>
+                {renderCalendarDays()}
+              </ContainerCalendar>
           </div>
-          <span style={{color: 'black'}}>{currentDate.getFullYear()} </span>
-          <TitleMain>{getMonthName(monthMain)}</TitleMain>
-          <div onClick={handleNextMonth}>
-            <AiOutlineStepForward size={30} color="#000" cursor='pointer'/>
-          </div>
-        </ContainerTitle>
-        <ContainerCalendar>
-          {renderCalendarDays()}
-        </ContainerCalendar>
-    </ContainerPrincipal>
+          <ContainerChamados>
+            {chamadosMostrar.map(ch => {
+              let status = statuslist.find(st => st.id === ch.id_status) ?? {};
+              return (
+                <Chamado chamado={ch} status={status.nome} key={ch.id}></Chamado>
+              );
+            })}
+          </ContainerChamados>
+        </ContainerCalendarChamados>
+    </ContainerPrincipalCalendario>
   );
 };
 

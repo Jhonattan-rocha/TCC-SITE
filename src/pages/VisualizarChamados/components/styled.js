@@ -51,11 +51,11 @@ export const DivChamado = styled.div`
         padding: 5px;
 
         label{
-            white-space: nowrap;        /* Impede que o texto quebre para a próxima linha */
-            overflow: hidden;           /* Esconde qualquer texto que ultrapasse a largura máxima */
-            text-overflow: ellipsis;    /* Adiciona "..." quando o texto ultrapassar a largura */
-            max-width: 120px;           /* Define a largura máxima do rótulo */
-            display: inline-block;      /* Permite que o rótulo mantenha seu tamanho máximo */
+            white-space: nowrap;        
+            overflow: hidden;         
+            text-overflow: ellipsis;   
+            max-width: 120px;         
+            display: inline-block;    
         }
     }
 
@@ -138,30 +138,6 @@ export const Form = styled.div`
     }
 `;
 
-
-
-export const DivPopUp = styled.div`
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    border: 1px solid #ccc;
-    padding: 20px;
-    z-index: 4;
-    border-radius: 10px;
-`;
-
-export const DivOverLay = styled.div`
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 3;
-`;
-
 export const ContainerEditar = styled.section`
     width: 100%;
     min-width: 700px;
@@ -241,26 +217,6 @@ export const SectionOne = styled.section`
             border-radius: 10px;
             overflow: scroll;
             overflow-x: hidden;
-            /* Estilizando a barra de rolagem */
-            ::-webkit-scrollbar {
-            width: 5px; /* Largura da barra de rolagem */
-            border-radius: 20px;
-            }
-
-            /* Estilizando o track da barra de rolagem */
-            ::-webkit-scrollbar-track {
-            background-color: #f1f1f1; /* Cor de fundo do track */
-            }
-
-            /* Estilizando o thumb (alça) da barra de rolagem */
-            ::-webkit-scrollbar-thumb {
-            background-color: #888; /* Cor do thumb */
-            }
-
-            /* Estilizando o thumb ao passar o mouse */
-            ::-webkit-scrollbar-thumb:hover {
-            background-color: #555; /* Cor do thumb ao passar o mouse */
-            }
         }
     }
 `;
@@ -298,26 +254,6 @@ export const SectionThree = styled.section`
     max-height: 150px;
     overflow: scroll;
     overflow-x: hidden;
-    /* Estilizando a barra de rolagem */
-    ::-webkit-scrollbar {
-    width: 5px; /* Largura da barra de rolagem */
-    border-radius: 20px;
-    }
-
-    /* Estilizando o track da barra de rolagem */
-    ::-webkit-scrollbar-track {
-    background-color: #f1f1f1; /* Cor de fundo do track */
-    }
-
-    /* Estilizando o thumb (alça) da barra de rolagem */
-    ::-webkit-scrollbar-thumb {
-    background-color: #888; /* Cor do thumb */
-    }
-
-    /* Estilizando o thumb ao passar o mouse */
-    ::-webkit-scrollbar-thumb:hover {
-    background-color: #555; /* Cor do thumb ao passar o mouse */
-    }
 
     .comentario{
         display: flex;
@@ -348,26 +284,6 @@ export const SectionFour = styled.section`
     max-height: 150px;
     overflow: scroll;
     overflow-x: hidden;
-    /* Estilizando a barra de rolagem */
-    ::-webkit-scrollbar {
-    width: 5px; /* Largura da barra de rolagem */
-    border-radius: 20px;
-    }
-
-    /* Estilizando o track da barra de rolagem */
-    ::-webkit-scrollbar-track {
-    background-color: #f1f1f1; /* Cor de fundo do track */
-    }
-
-    /* Estilizando o thumb (alça) da barra de rolagem */
-    ::-webkit-scrollbar-thumb {
-    background-color: #888; /* Cor do thumb */
-    }
-
-    /* Estilizando o thumb ao passar o mouse */
-    ::-webkit-scrollbar-thumb:hover {
-    background-color: #555; /* Cor do thumb ao passar o mouse */
-    }
     .arquivo{
         display: flex;
         align-items: center;
@@ -441,21 +357,19 @@ export const TextContainer = styled(DropArea)`
     flex-direction: column;
     justify-content:flex-start;
     border: 0.3px solid black;
-    padding-top: 10px;
-    width: 200px;
-    height: 200px;
-    flex-grow: 1;
+    width: 70px;
+    height: 70px;
 `;
 
-export const ContainerPrincipal = styled.div`
+export const ContainerPrincipalCalendario = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   background-color: white;
-  width: 100%;
+  width: 90%;
   height: 100%;
-  background-color: rgb(255, 255, 255)F;
+  background-color: rgb(255, 255, 255);
 `;
 
 export const ContainerCalendar = styled.div`
@@ -464,35 +378,13 @@ export const ContainerCalendar = styled.div`
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
-
-    max-height: 90vh;
-    overflow: scroll;
-    overflow-x: hidden;
-    /* Estilizando a barra de rolagem */
-    ::-webkit-scrollbar {
-    width: 5px; /* Largura da barra de rolagem */
-    border-radius: 20px;
-    }
-
-    /* Estilizando o track da barra de rolagem */
-    ::-webkit-scrollbar-track {
-    background-color: #f1f1f1; /* Cor de fundo do track */
-    }
-
-    /* Estilizando o thumb (alça) da barra de rolagem */
-    ::-webkit-scrollbar-thumb {
-    background-color: #888; /* Cor do thumb */
-    }
-
-    /* Estilizando o thumb ao passar o mouse */
-    ::-webkit-scrollbar-thumb:hover {
-    background-color: #555; /* Cor do thumb ao passar o mouse */
-    }
+    align-self: flex-start;
+    width: 500px;
+    min-width: 30%;
+    height: 80%;
 `;
 
-export const TitleMain = styled.span`
+export const TitleMonth = styled.span`
   color: black;
   font-weight: bold;
   font-size: 22px;
@@ -500,64 +392,32 @@ export const TitleMain = styled.span`
 
 export const ContainerTitle = styled.div`
     display: flex;
-    align-content: center;
+    align-items: center;
     justify-content: center;
     flex-direction: row;
     flex-grow: 1;
-    margin: 5px;
-    height: fit-content;
+    max-height: 60px;
 `;
 
-export const TextQtdChamado = styled.span`
-  color: rgb(0, 0, 0);
-  text-align: center;
-  font-size: 18px;
-`;
-
-
-export const ContainerChamado = styled.div`
+export const ContainerCalendarChamados = styled.section`
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: row;
     width: 100%;
-    height: fit-content;
-    max-height: 100px;
-    border: 0.1px solid black;
-    padding: 10px;
-    span{
-        text-align: center;
-        color: black;
-        font-size: 14px;
-        font-family: Arial, Helvetica, sans-serif;
-    }
 `;
 
-export const ContainerChamados = styled.div`
-  display: flex;
-  flex-direction: column; /* Define a direção do crescimento para baixo */
-  align-items: center; /* Centraliza o conteúdo horizontalmente */
-  justify-content: flex-start; /* Alinha o conteúdo no topo */
-  border: 1px solid #ccc;
-  max-height: 400px; /* Define uma altura máxima para o crescimento */
-
-  /* Adicione um scroll quando o conteúdo exceder a altura máxima */
-  overflow-y: auto;
-  ::-webkit-scrollbar {
-    width: 5px; /* Largura da barra de rolagem */
-    border-radius: 20px;
-    }
-
-    /* Estilizando o track da barra de rolagem */
-    ::-webkit-scrollbar-track {
-    background-color: #f1f1f1; /* Cor de fundo do track */
-    }
-
-    /* Estilizando o thumb (alça) da barra de rolagem */
-    ::-webkit-scrollbar-thumb {
-    background-color: #888; /* Cor do thumb */
-    }
-
-    /* Estilizando o thumb ao passar o mouse */
-    ::-webkit-scrollbar-thumb:hover {
-    background-color: #555; /* Cor do thumb ao passar o mouse */
-    }
+export const ContainerChamados = styled.section`
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    max-height: 600px;
+    border-radius: 10px;
+    padding: 10px;
+    overflow: scroll;
+    overflow-x: hidden;
 `;
 
 export const ButtonAttachFile = styled.button`

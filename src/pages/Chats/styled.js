@@ -115,7 +115,7 @@ export const DivChatTitle = styled.div`
     padding: 10px;
     justify-self: flex-start;
     cursor: pointer;
-    width: 100%;
+    width: 20%;
     margin-bottom: 10px;
 
     p{

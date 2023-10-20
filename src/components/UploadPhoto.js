@@ -7,7 +7,7 @@ import axios from 'axios';
 import { baseURL, ApiPort, SocketPort } from '../config/appConfig';
 
 
-const UploadPhoto = ({filter = "", file_name = "", setImg = () => {}, change = true, apiDownload = true, socketDownload = false, size={container: 150, img: 200}}) => {
+const UploadPhoto = ({filter = "", file_name = "", setImg = () => {}, change = true, apiDownload = true, socketDownload = false, preView = true, size={container: 150, img: 200}}) => {
   const [uploadedImage, setUploadedImage] = useState(null);
   const [View, setView] = useState(false);
   const user = useSelector(state => state.authreducer);
@@ -89,12 +89,12 @@ const UploadPhoto = ({filter = "", file_name = "", setImg = () => {}, change = t
 
   return (
       <>
-        {View ? 
+        {View && preView ? 
         <DivPopUp style={{display: 'flex', alignItems: 'flex-end', flexDirection: 'column'}}>
             <AiOutlineClose onClick={() => setView(false)} cursor={'pointer'} size={30}></AiOutlineClose>
             <img src={uploadedImage} alt="Imagem do usuário" style={{flex: 1, maxWidth: '100%', maxHeight: '100%'}}></img>
         </DivPopUp>
-      : null} 
+        : null} 
         <UploadContainer>
             <ImgPreview size={size} onClick={() => {
                 if(uploadedImage){
