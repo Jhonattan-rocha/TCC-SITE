@@ -73,8 +73,8 @@ export default createGlobalStyle`
         color: white;
     }
     ::-webkit-scrollbar {
-        width: 8px; /* Largura da barra de rolagem */
-        margin-right: 8px; /* Margem à direita da barra de rolagem */
+        width: 5px; /* Largura da barra de rolagem */
+        margin-right: 5px; /* Margem à direita da barra de rolagem */
     }
 
     /* Estilizando o track da barra de rolagem */

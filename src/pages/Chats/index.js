@@ -34,8 +34,6 @@ export default function Chats(props) {
 
   console.log(chats)
   return (
-    <div style={{width: '100%', height: '100%'}}>
-      <SubHeader></SubHeader>
       <Divhome>
           {openConfig ? <Config open={openConfig} setClose={setOpenConfig} chat={chat}></Config>:null}
           <DivListaDeChamados>
@@ -77,6 +75,5 @@ export default function Chats(props) {
             </DivChat>
           : null}
       </Divhome>
-    </div>
   );
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { ContainerCalendar, ContainerCalendarChamados, ContainerChamados, ContainerPrincipalCalendario, ContainerTitle, DayContainer, TextContainer, TextDayCalendar, TitleMonth } from "./styled";
 import { AiFillCheckCircle, AiOutlineStepBackward, AiOutlineStepForward } from "react-icons/ai";
@@ -7,14 +7,16 @@ import Chamado from "./chamado";
 
 function CalendarComponent(props) {
   const currentDate = new Date(); // Obtenha a data atual
-  const [monthMain, setMonth] = React.useState(currentDate.getMonth())
+  const [monthMain, setMonth] = useState(currentDate.getMonth())
   const daysInMonth = new Date(currentDate.getFullYear(), monthMain+1, 0).getDate(); // Obtenha o número de dias no mês atual
   
   const user = useSelector(state => state.authreducer);
   const dispatch = useDispatch();
   const chamadoslist = useSelector(state => state.chamadosreducer.chamados.result) ?? [];
   const statuslist = useSelector(state => state.chamadosreducer.status.result) ?? [];
-  const [chamadosMostrar, setChamadosMostrar] = React.useState([]);
+  const [chamadosMostrar, setChamadosMostrar] = useState([]);
+  const [DaySelected, setDaySelected] = useState('');
+  const [Days, setDays] = useState([]);
 
   const handleDrop = (event, data) => {
     event.preventDefault();
@@ -67,10 +69,10 @@ function CalendarComponent(props) {
     return months[monthNumber];
   };
 
-  const renderCalendarDays = () => {
+  const renderCalendarDays = useMemo(() => {
     const calendarDays = [];
 
-     for (let i = 1; i <= daysInMonth; i++) {
+    for (let i = 1; i <= daysInMonth; i++) {
       const date = new Date(currentDate.getFullYear(), monthMain, i);
       const day = date.getDate();
       const month = monthMain + 1;
@@ -83,13 +85,16 @@ function CalendarComponent(props) {
         const ano = data.getFullYear();
 
         if(Number(dia) === Number(day) && Number(mes) === Number(month) && Number(ano) === Number(year)){
-            return chamados
-        }
+            return chamados;
+        };
       }) ?? []
 
       calendarDays.push(
-        <DayContainer key={i} onClick={() => setChamadosMostrar(chamadosfiltrados)}>
-          <TextContainer handleDrop={(e) => handleDrop(e, date)} handleDragOver={handleDragOver}>
+        <DayContainer key={i} onClick={() => {
+            setChamadosMostrar(chamadosfiltrados);
+            setDaySelected(day);
+          }}>
+          <TextContainer press={DaySelected === day} handleDrop={(e) => handleDrop(e, date)} handleDragOver={handleDragOver}>
               <TextDayCalendar>{day}</TextDayCalendar>
           </TextContainer>
         </DayContainer>
@@ -97,7 +102,11 @@ function CalendarComponent(props) {
     }
 
     return calendarDays;
-  };
+  }, [chamadoslist, currentDate, monthMain, chamadosMostrar]);
+
+  useEffect(() => {
+    setDays(renderCalendarDays);
+  }, [renderCalendarDays]);
 
   return (
     <ContainerPrincipalCalendario>
@@ -114,7 +123,9 @@ function CalendarComponent(props) {
               </div>
               </ContainerTitle>
               <ContainerCalendar>
-                {renderCalendarDays()}
+                {Days.map(day => (
+                  day
+                ))}
               </ContainerCalendar>
           </div>
           <ContainerChamados>

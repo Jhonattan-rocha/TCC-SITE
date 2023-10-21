@@ -8,7 +8,8 @@ export const Divhome = styled.div`
     flex-direction: row;
     background-color: white;
     width: 100%;
-    height: 85%;
+    min-width: 400px;
+    height: 81.9%;
     border-radius: 10px;
     padding-left: 60px;
 `;
@@ -69,6 +70,7 @@ export const DivChat = styled.div`
     flex-direction: column;
     background-color: white;
     width: 80%;
+    min-width: 400px;
     height: 100%;
     border: 1px solid rgba(0,0,0,0.3);
     border-radius: 10px;

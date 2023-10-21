@@ -16,7 +16,6 @@ export default function VisualizarChamados(){
 
     const [filtroChamados, setFiltroChamados] = React.useState("my")
     const iduser = useSelector(state => state.authreducer.user.id);
-    const [view, setView] = React.useState("column");
 
     React.useEffect(() => {
         dispatch(actions.STATUS_REQUEST());
@@ -27,16 +26,10 @@ export default function VisualizarChamados(){
         }else if(filtroChamados === "any"){
             dispatch(actions.CHAMADOSREQUEST());
         }
-    }, [iduser, dispatch, filtroChamados])
+    }, [iduser, dispatch, filtroChamados]);
 
     return (
             <Container>
-                    <SubHeader></SubHeader>
-                    <select id="filtro" value={filtroChamados} onChange={(e) => setFiltroChamados(e.target.value)}>
-                            <option value="my">Meus Chamados</option>
-                            <option value="other">Chamado dos outros</option>
-                            <option value="any">Qualquer um</option>
-                    </select>
                     <Forms>
                         <CalendarComponent></CalendarComponent>
                     </Forms>

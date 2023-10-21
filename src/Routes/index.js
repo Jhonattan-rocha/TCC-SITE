@@ -12,12 +12,13 @@ import CadastroFuncionario from "../pages/CadastrarFuncionario";
 import VisualizarChamados from "../pages/VisualizarChamados";
 import CriarChamados from '../pages/CriarChamado';
 import Chats from '../pages/Chats';
-
+import SubHeader from "../components/SubHeader";
 
 export default function Rotas(){
     return (
         <>
             <Header></Header>
+            <SubHeader></SubHeader>
                 <Routes>
                     <Route path="/Login" element={<Login></Login>}/>
                     <Route path="/" element={ 

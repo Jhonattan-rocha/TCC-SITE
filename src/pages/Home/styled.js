@@ -5,12 +5,10 @@ export const Divhome = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    flex: 1;
-    margin: auto;
-    padding: 10ox;
+    padding: 10px;
     background-color: white;
-    min-width: 100%;
-    min-height: 100%;
+    width: 100%;
+    height: 100%;
 `;
 
 export const DivCharts = styled.div`
@@ -19,6 +17,9 @@ export const DivCharts = styled.div`
     justify-content: space-between;
     flex-direction: row;
     width: 100%;
+    
+    overflow: scroll;
+    overflow-x: hidden;
 
     #coluna1{
         display: flex;

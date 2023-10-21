@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { azulclaro } from '../../../config/colors';
 import DraggableItem from '../../../components/DraggableItem';
 import DropArea from "../../../components/DragArea";
+import { memo } from "react";
 
 export const DraggableItemStyled = styled(DraggableItem)`
     background-color: ${azulclaro};
@@ -334,41 +335,46 @@ export const TextCalendarStyled = styled.span`
 
 export const TextDayCalendar = styled.span`
     font-family: Arial;
-    font-size: 15px;
-    border-bottom-color: rgb(0, 0, 0);
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
+    font-size: 25px;
     text-align: center;
     width: 100%;
 `;
 
-export const DayContainer = styled.div`
+export const DayContainer = memo(styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     color: black;
     cursor: pointer;
-`;
+`);
 
 export const TextContainer = styled(DropArea)`
-    background-color: rgb(255, 255, 255);
+    background-color: ${props => props.press ? 'rgb(0,0,0,.1)': 'rgb(255, 255, 255)'};
     display: flex;
     flex-direction: column;
-    justify-content:flex-start;
+    align-items: center;
+    justify-content: center;
     border: 0.3px solid black;
-    width: 70px;
-    height: 70px;
+    border-radius: 40%;
+    margin: 5px;
+    width: 80px;
+    height: 80px;
+
+    box-shadow: ${props => props.press ? 'inset': ''} 1px 1px 1px 1px rgba(0,0,0,0.7);
 `;
 
 export const ContainerPrincipalCalendario = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   background-color: white;
-  width: 90%;
+  width: 100%;
   height: 100%;
+  max-height: 600px;
+  overflow: scroll;
+  overflow-x: hidden;
   background-color: rgb(255, 255, 255);
 `;
 
@@ -379,7 +385,7 @@ export const ContainerCalendar = styled.div`
     justify-content: center;
     align-items: center;
     align-self: flex-start;
-    width: 500px;
+    width: 600px;
     min-width: 30%;
     height: 80%;
 `;
@@ -401,21 +407,24 @@ export const ContainerTitle = styled.div`
 
 export const ContainerCalendarChamados = styled.section`
     display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
+    align-items: center;
+    justify-content: center;
     flex-direction: row;
     width: 100%;
+    flex-wrap: wrap;
 `;
 
 export const ContainerChamados = styled.section`
     display: flex;
     align-items: flex-start;
-    justify-content: center;
+    justify-content: flex-start;
     flex-direction: column;
     width: 100%;
-    max-height: 600px;
+    height: 100%;
+    min-width: 450px;
+    max-width: 700px;
+    max-height: 550px;
     border-radius: 10px;
-    padding: 10px;
     overflow: scroll;
     overflow-x: hidden;
 `;
