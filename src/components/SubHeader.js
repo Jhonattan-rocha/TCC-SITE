@@ -5,16 +5,8 @@ import UploadPhoto from "./UploadPhoto";
 import * as actions from "../store/modules/chamadosreducer/actions";
 
 export default function SubHeader(props){
-    const iduser = useSelector(state => state.authreducer.user.id);
-    const funcionarios = useSelector(state => {
-        try{
-            return state.funcionarioreducer.funcionarios.result
-        }catch(err){
-            return []
-        }
-    });
+    const user = useSelector(state => state.authreducer.user);
 
-    const [user, setUser] = React.useState(funcionarios.find(func => func.id === iduser));
     const [filter, setFilter] = React.useState('id+eq+'+user.id_foto);
     const dispatch = useDispatch();
 
@@ -22,21 +14,13 @@ export default function SubHeader(props){
     React.useEffect(() => {
         dispatch(actions.STATUS_REQUEST());
         if(filtroChamados === 'my'){
-            dispatch(actions.CHAMADOSREQUEST({filter: `id_funcionario_criador+eq+${iduser}`}));
+            dispatch(actions.CHAMADOSREQUEST({filter: `id_funcionario_criador+eq+${user.id}`}));
         }else if(filtroChamados === "other"){
-            dispatch(actions.CHAMADOSREQUEST({filter: `id_funcionario_criador+ne+${iduser}`}));
+            dispatch(actions.CHAMADOSREQUEST({filter: `id_funcionario_criador+ne+${user.id}`}));
         }else if(filtroChamados === "any"){
             dispatch(actions.CHAMADOSREQUEST());
         }
-    }, [iduser, dispatch, filtroChamados]);
-
-    React.useEffect(() => {
-        setUser(funcionarios.find(func => func.id === iduser));
-        setTimeout(() => {
-            setFilter('id+eq+'+user.id_foto);
-        }, 1);
-    }, [funcionarios, iduser]);
-
+    }, [user.id, dispatch, filtroChamados]);
 
     return (
         <SubHeaderContainer>

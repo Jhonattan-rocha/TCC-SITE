@@ -9,10 +9,6 @@ import { toast } from "react-toastify";
   
 export default function Login(){
     const dispatch = useDispatch();
-    // dispara eventos do redux, usa no reducer para fazer alterações no estado de acordo coma a ação
-    // se a função passada ter dependentes e eu quero que ela seja executada sempre que os dependentes mudarem, passar a variável no []
-    React.useEffect(() => {}, []);
-
     const [email, setEmail] = React.useState("")
     const [password, setPassword] = React.useState("")
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import Home from "../pages/Home";
 import Header from "../components/header";
@@ -15,49 +16,59 @@ import Chats from '../pages/Chats';
 import SubHeader from "../components/SubHeader";
 
 export default function Rotas(){
+
+    const location = useLocation();
+
     return (
         <>
             <Header></Header>
-            <SubHeader></SubHeader>
                 <Routes>
                     <Route path="/Login" element={<Login></Login>}/>
                     <Route path="/" element={ 
                         <Protected component={Home} isClosed={true}>
+                            <SubHeader></SubHeader>
                             <Home></Home>
                         </Protected>
                     }/>
                     <Route index path="/Home" element={
                         <Protected component={Home} isClosed={true}>
+                            <SubHeader></SubHeader>
                             <Home></Home>
                         </Protected>
                     }/>
                     <Route path="/CadastroEmpresa" element={
                         <Protected component={CadastroEmpresa} isClosed={true}>
+                            <SubHeader></SubHeader>
                             <CadastroEmpresa></CadastroEmpresa>
                         </Protected>
                     }/>
                     <Route path="/CadastroFilial" element={
                         <Protected component={CadastroFilial} isClosed={true}>
+                            <SubHeader></SubHeader>
                             <CadastroFilial></CadastroFilial>
                         </Protected>
                     }/>
                     <Route path="/CadastroFuncionario" element={
                         <Protected component={CadastroFuncionario} isClosed={true}>
+                            <SubHeader></SubHeader>
                             <CadastroFuncionario></CadastroFuncionario>
                         </Protected>
                     }/>
                     <Route path="/VisualizarChamados" element={
                         <Protected component={VisualizarChamados} isClosed={true}>
+                            <SubHeader></SubHeader>
                             <VisualizarChamados></VisualizarChamados>
                         </Protected>
                     }/>
                     <Route path="/CriarChamados" element={
                         <Protected component={CriarChamados} isClosed={true}>
+                            <SubHeader></SubHeader>
                             <CriarChamados></CriarChamados>
                         </Protected>
                     }/>
                     <Route path="/Chats" element={
                         <Protected component={Chats} isClosed={true}>
+                            <SubHeader></SubHeader>
                             <Chats></Chats>
                         </Protected>
                     }/>
