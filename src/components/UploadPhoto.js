@@ -40,18 +40,20 @@ const UploadPhoto = ({filter = "", file_name = "", setImg = () => {}, change = t
   }
 
   const DownLoadFileToBlob = async (file_name) => {
-    try{
-      let response = await axios.get(`http://${baseURL}:${SocketPort}/download/` + file_name, {
-        method: "GET",
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${user.token}` },
-        responseType: 'blob'
-      })
-
-      const blob = new Blob([response.data], { type: 'application/octet-stream' });
-      const url = URL.createObjectURL(blob)
-      setUploadedImage(url)
-    }catch(err){
-      console.log(err)
+    if(file_name){
+      try{
+        let response = await axios.get(`http://${baseURL}:${SocketPort}/download/` + file_name, {
+          method: "GET",
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${user.token}` },
+          responseType: 'blob'
+        })
+  
+        const blob = new Blob([response.data], { type: 'application/octet-stream' });
+        const url = URL.createObjectURL(blob)
+        setUploadedImage(url)
+      }catch(err){
+        console.log(err)
+      }
     }
   }
 

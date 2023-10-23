@@ -11,6 +11,60 @@ export const Title = styled.h1`
     }
 `;
 
+
+export const ContainerPrincipal = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: linear-gradient(to right, #050A30 60%,  #233DFF 40%);
+`;
+
+export const ContainerSection = styled.div`
+    width: 100%;
+    height: 60%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 50px;
+    padding-right: 445px;
+`;
+
+
+export const ImgLogo = styled.img`
+    width: 300px;
+    height: 200px;
+    margin-left: 40px;
+    margin-bottom: 40px;
+`;
+
+export const InputForm = styled.div`
+    margin-bottom: 10px;
+    height: 50px;
+    width: 344px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    background-color: #cacaca;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+
+    input {
+        width: 80%;
+        height: 100%;
+        border: none;
+        background-color: #cacaca;
+        border-radius: 20px;
+        margin-left: 10px;
+    }
+`;
+
 export const Form = styled.form`
     background-color: white;
     max-width: 500px;

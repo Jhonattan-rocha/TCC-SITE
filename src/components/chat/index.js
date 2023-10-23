@@ -112,7 +112,7 @@ export default function Chat(props) {
         try{
             ws.emit('re', {id: idChat, idMes: chat[chat.length - 1].id});
         }catch(err){
-            console.log(err, "primeira vez no chat")
+            console.log("primeira vez no chat")
         }
  
         

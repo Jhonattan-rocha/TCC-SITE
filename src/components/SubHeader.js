@@ -10,7 +10,7 @@ export default function SubHeader(props){
     const [filter, setFilter] = React.useState('id+eq+'+user.id_foto);
     const dispatch = useDispatch();
 
-    const [filtroChamados, setFiltroChamados] = React.useState("my")
+    const [filtroChamados, setFiltroChamados] = React.useState("my");
     React.useEffect(() => {
         dispatch(actions.STATUS_REQUEST());
         if(filtroChamados === 'my'){
@@ -24,7 +24,7 @@ export default function SubHeader(props){
 
     return (
         <SubHeaderContainer>
-            <img src={require('../pages/assests/Logo.jpeg')} style={{widows: 120, height: 120}}></img>
+            <img src={require('../pages/assests/Logo2.jpeg')} style={{widows: 120, height: 120}}></img>
 
             <select id="filtro" value={filtroChamados} onChange={(e) => setFiltroChamados(e.target.value)}>
                     <option value="my">Meus Chamados</option>

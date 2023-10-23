@@ -1,12 +1,11 @@
 import React from "react";
 
 import './style.css'
-import { Forms, Legend, Container,} from "./styles";
+import { Forms, Container,} from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from '../../store/modules/chamadosreducer/actions';
 import CalendarComponent from "./components/Calendario";
 import ColumnComponent from './components/Column';
-import SubHeader from "../../components/SubHeader";
 
 export default function VisualizarChamados(){
     // dispara eventos do redux, usa no reducer para fazer alterações no estado de acordo coma a ação

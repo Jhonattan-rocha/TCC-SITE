@@ -43,6 +43,10 @@ function* CriarChats({payload}){
             'Authorization': `Bearer ${token}`
           };
         const response = yield call(axios.post, `http://${baseURL}:${SocketPort}/chat/`, payload);
+
+        if(payload.id_foto){
+            yield put(actions.CHATS_EDITAR_COM_FOTO_REQUEST({...payload}))
+        }
         yield put(actions.CHATS_CRIAR_SUCCESS({...response.data}));
         yield put(actions.CHATS_BUSCAR_REQUEST());
     }catch(error){
@@ -65,7 +69,7 @@ function* EditarChatsComFoto({payload}){
         formData.append('tag', 'profile_photo');
         formData.append('file', payload.img);
         const responseFile = yield call(axios.patch, `http://${baseURL}:${SocketPort}/chat_foto/${payload.id}`, formData);
-        console.log(responseFile);
+        payload.id_foto = responseFile.data.arquivo.id
 
         axios.defaults.headers = {
             'Content-Type' :'application/json',

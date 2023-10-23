@@ -1,43 +1,73 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
+import './styles.css';
+import { ContainerPrincipal, ContainerSection, ImgLogo, InputForm } from './styles';
+import { FaUser } from 'react-icons/fa';
+import { MdPassword } from 'react-icons/md';
+import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
+import { useDispatch, useSelector } from 'react-redux';
+import * as actions from '../../store/modules/authReducer/actions';
+import { toast } from 'react-toastify';
+import history from '../../services/history';
 
-import { Form } from "./styles";
-import { Login as login } from "../../store/modules/authReducer/actions";
-import { useDispatch } from 'react-redux';
-import Home from '../Home';
-import history from "../../services/history";
-import { toast } from "react-toastify";
-  
-export default function Login(){
-    const dispatch = useDispatch();
-    const [email, setEmail] = React.useState("")
-    const [password, setPassword] = React.useState("")
+function Login() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [type, setType] = useState('password');
+  const user = useSelector(state => state.authreducer.user);
 
-    function handleSubmit(e){
-        e.preventDefault();
-        if(!email && !password){
-            toast.error("O email e senha não pode ser vazio")
-            return false
-        }
-        dispatch(login({email: email, password: password, type: "e"}));
-        history.push('/Home');
-        return (
-            <>
-                <Home></Home>
-            </>
-        );
+  const dispatch = useDispatch();
+
+  const handleLogin = () => {
+    if(!username || !password){
+        toast.error('Email ou senha vazios');
+        return
     }
+    dispatch(actions.Login({email: username, password: password}));
+  };
 
-    return (
-        <>
-            <Form onSubmit={handleSubmit}>
-                <h3>
-                    Login
-                </h3>
-                <input id="email" type="text" name="email" placeholder="E-mail" value={email} onChange={(e) => setEmail(e.target.value)}/>
-                <input id="pswd"type="password" name="pass" placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)}/>
-                <input type="submit" name="btnEnviar" value="Entrar"/>
-            </Form>
-        </>
-    );
+  useEffect(() => {
+    if(user.token){
+        history.push('/Home', user);
+    }
+  }, [user]);
+
+  return (
+    <ContainerPrincipal>
+        <ContainerSection>
+            <ImgLogo src={require('../assests/Logo-removebg-preview.png')}></ImgLogo>
+            <div style={{ backgroundColor: 'darkpurple' }} className='login-page'>
+                <span>Login</span>
+                <InputForm>
+                    <FaUser color='white' size={30}></FaUser>
+                    <input
+                        type="text"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        placeholder="Usuario"
+                    />
+                </InputForm>
+                <InputForm>
+                    <MdPassword color='white' size={30}></MdPassword>
+                    <input
+                        type={type}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Senha"
+                    />
+                    {type === 'password' ? 
+                    <AiOutlineEye size={30} color='white' onClick={() => setType('text')} cursor={'pointer'}></AiOutlineEye>
+                    : 
+                    <AiOutlineEyeInvisible size={30} color='white' onClick={() => setType('password')} cursor={'pointer'}></AiOutlineEyeInvisible>
+                    }
+                </InputForm>
+                <a href='#'>Esqueci minha senha</a>
+                <button onClick={handleLogin} style={{ color: 'white' }}>
+                    Logar
+                </button>
+            </div>
+        </ContainerSection>
+    </ContainerPrincipal>
+  );
 }
 
+export default Login;

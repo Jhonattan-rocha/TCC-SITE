@@ -16,7 +16,7 @@ export default function Config(props){
     const [descricao, setDescricao] = React.useState(chat.descricao);
     const [img, setImg] = React.useState("");
 
-    const profile = chat.arquivos.filter(file => file.tag === 'profile_photo')[0]
+    const profile = chat.arquivos.filter(file => file.id === chat.id_foto)[0]
     return (
         <Sidebar open={open}>
             <DivContainerConfig>
@@ -51,12 +51,11 @@ export default function Config(props){
                     }else{
                         dispatch(actions.CHATS_EDITAR_REQUEST({id: chat.id, titulo: titulo, descricao: descricao}))
                     }
-                    
-                    setOpen(false);
-                    props.setClose(false);
                     setTimeout(() => {
                         dispatch(actions.CHATS_BUSCAR_REQUEST());
                     }, 2000)
+                    setOpen(false);
+                    props.setClose(false);
                 }}>Salvar</button>
             </DivContainerConfig>
         </Sidebar>

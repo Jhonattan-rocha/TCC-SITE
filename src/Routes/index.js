@@ -11,7 +11,7 @@ import CadastroEmpresa from "../pages/CadastrarEmpresa";
 import CadastroFilial from "../pages/CadastrarFilial";
 import CadastroFuncionario from "../pages/CadastrarFuncionario";
 import VisualizarChamados from "../pages/VisualizarChamados";
-import CriarChamados from '../pages/CriarChamado';
+import CriarChamados from '../pages/CriarChamado/index2';
 import Chats from '../pages/Chats';
 import SubHeader from "../components/SubHeader";
 
