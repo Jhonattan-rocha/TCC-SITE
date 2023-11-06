@@ -1,13 +1,13 @@
 import { FaHome, FaSignInAlt, FaUserTie, FaSearch, FaPhoneAlt, FaUser, FaSignOutAlt, FaRocketchat } from "react-icons/fa";
+import { BiCategoryAlt } from "react-icons/bi";
 import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Loguot } from "../../store/modules/authReducer/actions";
 import { azulescuro } from "../../config/colors";
-import { useState } from "react";
 
 
 // pegar dados de uma ação
-import { Nav, DivRotas, LinkStyled, DivContainerNav, LabelStyled } from "./styled";
+import { Nav, DivRotas, LinkStyled, LabelStyled } from "./styled";
 
 
 export default function Header(){
@@ -53,10 +53,10 @@ export default function Header(){
                         <LabelStyled>Empresa</LabelStyled>
                     </DivRotas>
                 </LinkStyled>
-                <LinkStyled to="/CadastroFilial" hidden={!isLoggedIn}>
-                    <DivRotas className={isActiveRoute('/CadastroFilial') ? 'active' : ''}>
-                        <FaUserTie size={30} color={azulescuro}/>
-                        <LabelStyled>Filial</LabelStyled>
+                <LinkStyled to="/Categorizacao" hidden={!isLoggedIn}>
+                    <DivRotas className={isActiveRoute('/Categorizacao') ? 'active' : ''}>
+                        <BiCategoryAlt size={30} color={azulescuro}/>
+                        <LabelStyled>Categorias</LabelStyled>
                     </DivRotas></LinkStyled>
                 <LinkStyled to="/CadastroFuncionario" hidden={!isLoggedIn}>
                     <DivRotas className={isActiveRoute('/CadastroFuncionario') ? 'active' : ''}>

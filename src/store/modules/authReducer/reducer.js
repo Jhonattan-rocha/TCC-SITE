@@ -20,7 +20,7 @@ export default function recuder(state = initialState, action){
         }
 
         case type.LOGIN_FALURE: {
-            toast.error("Email ou senha inválidos")
+            toast.error(action.payload.response.data.error)
             const newState = initialState
             return newState
         }

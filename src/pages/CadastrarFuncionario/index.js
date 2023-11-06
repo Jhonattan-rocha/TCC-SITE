@@ -15,21 +15,21 @@ import EditarFuncionario from './components/EditarFuncionario';
 
 export default function CadastroFuncionario(){
 
-    const [departamento, setDepartamento] = React.useState("");
-    const [nome, setNome] = React.useState("");
-    const [email, setEmail] = React.useState("");
-    const [telefone, setTelefone] = React.useState("");
-    const [endereco, setEndereco] = React.useState("");
-    const [bairro, setBairro] = React.useState("");
+    const [departamento, setDepartamento] = React.useState();
+    const [nome, setNome] = React.useState();
+    const [email, setEmail] = React.useState();
+    const [telefone, setTelefone] = React.useState();
+    const [endereco, setEndereco] = React.useState();
+    const [bairro, setBairro] = React.useState();
     const [status, setStatus] = React.useState("inativo");
-    const [password, setPassword] = React.useState("");
-    const [confirmpassword, setConfirmpassword] = React.useState("");
-    const [cpf, setCPF] = React.useState("");
-    const [numero, setNumero] = React.useState("");
-    const [cep, setCep] = React.useState("");
-    const [cargo, setCargo] = React.useState("");
-    const [nivel, setNivel] = React.useState("");
-    const [setor, setSetor] = React.useState("");
+    const [password, setPassword] = React.useState();
+    const [confirmpassword, setConfirmpassword] = React.useState();
+    const [cpf, setCPF] = React.useState();
+    const [numero, setNumero] = React.useState();
+    const [cep, setCep] = React.useState();
+    const [cargo, setCargo] = React.useState();
+    const [nivel, setNivel] = React.useState();
+    const [setor, setSetor] = React.useState();
 
     const [isOpen1, setIsOpen1] = React.useState(false);
     const [isOpen2, setIsOpen2] = React.useState(false);
@@ -56,7 +56,7 @@ export default function CadastroFuncionario(){
         }catch(err){
             return []
         }
-    })
+    });
 
     function handleSubmit(e){
         e.preventDefault();
@@ -80,10 +80,11 @@ export default function CadastroFuncionario(){
                 endereco: `${endereco}`, 
                 numero: `${numero}`, 
                 bairro: `${bairro}`, 
-                cep: `${String(cep).replace(/\D/g, "")}`, 
+                cep: `${String(cep).replace(/\D/g, )}`, 
                 cpf: cpf,
                 password: password,
-                id_empresa: user.user.id_empresa,
+                id_empresa: user.user.id,
+                setor: setor,
                 photo: dados}));
         }else{
             dispatch(actions.FUNCIONARIOREQUEST({departamento: departamento, 
@@ -93,10 +94,11 @@ export default function CadastroFuncionario(){
                 endereco: `${endereco}`, 
                 numero: `${numero}`, 
                 bairro: `${bairro}`, 
-                cep: `${String(cep).replace(/\D/g, "")}`, 
+                cep: `${String(cep).replace(/\D/g, )}`, 
                 cpf: cpf,
+                setor: setor,
                 password: password,
-                id_empresa: user.user.id_empresa}));
+                id_empresa: user.user.id}));
         }
 
         setMostrar('list');      
@@ -116,7 +118,6 @@ export default function CadastroFuncionario(){
     }, [])
 
     return (
-       <>
             <div className="divContainerPrincipal">
                 <DivBotoesFuncionariosNavegacao>
                     <AiOutlineOrderedList size={30} style={{margin: 10}} cursor={'pointer'} onClick={() => setMostrar("list")}></AiOutlineOrderedList>
@@ -237,7 +238,6 @@ export default function CadastroFuncionario(){
                 : null}
                 {mostrar.match('edit') ? <EditarFuncionario funcionario={funcionarioSelecionado} close={() => setMostrar('list')}></EditarFuncionario> : null}
             </div>
-       </>
     );
 }
 

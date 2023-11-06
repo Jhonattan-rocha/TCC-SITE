@@ -64,6 +64,7 @@ export default function EditarFuncionario({funcionario = {}, close = () => {}}){
                 cpf: cpf,
                 id_empresa: funcionario.id_empresa,
                 id: funcionario.id,
+                setor:setor,
                 photo: dados}));
         }else{
             dispatch(actions.FUNCIONARIO_EDITARREQUEST({departamento: departamento, 
@@ -75,8 +76,9 @@ export default function EditarFuncionario({funcionario = {}, close = () => {}}){
                 bairro: `${bairro}`, 
                 cep: `${String(cep).replace(/\D/g, "")}`, 
                 cpf: cpf,
+                setor:setor,
                 id_empresa: funcionario.id_empresa,
-                id: funcionario.id}));
+                id: funcionario.id})); 
         }
 
         close();

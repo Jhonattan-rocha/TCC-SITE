@@ -20,11 +20,12 @@ export default function CriarSetor(props){
     const dispatch = useDispatch();
     const funcionarios = useSelector(state => {
         try{
-            return state.funcionarioreducer.funcionarios.result || []
+            return state.funcionarioreducer.funcionarios.result
         }catch(err){
             return 
         }
     })
+
     function handleSubmit(e){
         e.preventDefault();
         dispatch(actions.CRIAR_SETORES_REQUEST({nome: nome, responsavel: responsavel}));

@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { ContainerCalendar, ContainerCalendarChamados, ContainerChamados, ContainerPrincipalCalendario, ContainerTitle, DayContainer, TextContainer, TextDayCalendar, TitleMonth } from "./styled";
-import { AiFillCheckCircle, AiOutlineStepBackward, AiOutlineStepForward } from "react-icons/ai";
+import { AiOutlineStepBackward, AiOutlineStepForward } from "react-icons/ai";
 import * as actions from '../../../store/modules/chamadosreducer/actions';
 import Chamado from "./chamado";
 
@@ -10,7 +10,6 @@ import Chamado from "./chamado";
     const [monthMain, setMonth] = useState(currentDate.getMonth())
     const daysInMonth = new Date(currentDate.getFullYear(), monthMain+1, 0).getDate(); // Obtenha o número de dias no mês atual
     
-    const user = useSelector(state => state.authreducer);
     const dispatch = useDispatch();
     const chamadoslist = useSelector(state => state.chamadosreducer.chamados.result) ?? [];
     const statuslist = useSelector(state => state.chamadosreducer.status.result) ?? [];
@@ -24,7 +23,7 @@ import Chamado from "./chamado";
       dados = JSON.parse(dados)
       dados.agendamento = data;
       
-      dispatch(actions.EDITAR_CHAMADOREQUEST(dados))
+      dispatch(actions.EDITAR_CHAMADOREQUEST(dados));
       // Manipule os dados que foram soltos aqui
     };
 
@@ -69,33 +68,38 @@ import Chamado from "./chamado";
       return months[monthNumber];
     };
 
+    const handleUpdate = (i) => {
+      const date = new Date(currentDate.getFullYear(), monthMain, i);
+      const day = date.getDate();
+      const month = monthMain + 1;
+      const year = date.getFullYear();
+
+      const chamadosfiltrados = chamadoslist.filter(chamados => {
+        const data = new Date(chamados.agendamento);
+        const dia = data.getDate();
+        const mes = data.getMonth() + 1;
+        const ano = data.getFullYear();
+
+        if(Number(dia) === Number(day) && Number(mes) === Number(month) && Number(ano) === Number(year)){
+            return chamados;
+        };
+      }) ?? []
+
+      return chamadosfiltrados;
+    }
+
     const renderCalendarDays = useMemo(() => {
       const calendarDays = [];
       
       for (let i = 1; i <= daysInMonth; i++) {
         const date = new Date(currentDate.getFullYear(), monthMain, i);
-        const day = date.getDate();
-        const month = monthMain + 1;
-        const year = date.getFullYear();
-
-        const chamadosfiltrados = chamadoslist.filter(chamados => {
-          const data = new Date(chamados.agendamento);
-          const dia = data.getDate();
-          const mes = data.getMonth() + 1;
-          const ano = data.getFullYear();
-
-          if(Number(dia) === Number(day) && Number(mes) === Number(month) && Number(ano) === Number(year)){
-              return chamados;
-          };
-        }) ?? []
-
         calendarDays.push(
           <DayContainer key={i} onClick={() => {
-              setChamadosMostrar(chamadosfiltrados);
-              setDaySelected(day);
+              setChamadosMostrar(handleUpdate(i));
+              setDaySelected(i);
             }}>
-            <TextContainer press={DaySelected === day} handleDrop={(e) => handleDrop(e, date)} handleDragOver={handleDragOver}>
-                <TextDayCalendar>{day}</TextDayCalendar>
+            <TextContainer press={DaySelected === i} handleDrop={(e) => handleDrop(e, date)} handleDragOver={handleDragOver}>
+                <TextDayCalendar>{i}</TextDayCalendar>
             </TextContainer>
           </DayContainer>
         );

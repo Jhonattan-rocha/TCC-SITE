@@ -31,7 +31,7 @@ function* Chats({payload = {}}){
         yield put(actions.CHATS_BUSCAR_SUCCESS({...response.data}));
     }catch(error){
         console.log(error);
-        yield  put(actions.CHATS_BUSCAR_FALURE({error}));
+        yield  put(actions.CHATS_BUSCAR_FALURE(error));
     }
 }
 
@@ -51,7 +51,7 @@ function* CriarChats({payload}){
         yield put(actions.CHATS_BUSCAR_REQUEST());
     }catch(error){
         console.log(error);
-        yield put(actions.CHATS_CRIAR_FALURE({error}));
+        yield put(actions.CHATS_CRIAR_FALURE(error));
     }
 }
 
@@ -80,7 +80,7 @@ function* EditarChatsComFoto({payload}){
         yield put(actions.CHATS_BUSCAR_REQUEST());
     }catch(error){
         console.log(error);
-        yield put(actions.CHATS_EDITAR_FALURE({error}));
+        yield put(actions.CHATS_EDITAR_FALURE(error));
     }
 }
 
@@ -100,7 +100,7 @@ function* EditarChats({payload}){
         yield put(actions.CHATS_BUSCAR_REQUEST());
     }catch(error){
         console.log(error);
-        yield put(actions.CHATS_EDITAR_FALURE({error}));
+        yield put(actions.CHATS_EDITAR_FALURE(error));
     }
 }
 
@@ -119,7 +119,7 @@ function* DeletarChats({payload}){
         yield put(actions.CHATS_BUSCAR_REQUEST());
     }catch(error){
         console.log(error);
-        yield put(actions.CHATS_DELETAR_FALURE({error}));
+        yield put(actions.CHATS_DELETAR_FALURE(error));
     }
 }
 
@@ -138,7 +138,7 @@ function* DeletarArquivo({payload}){
         yield put(actions.CHATS_BUSCAR_REQUEST());
     }catch(error){
         console.log(error);
-        yield put(actions.CHATS_ARQUIVO_DELETAR_FALURE({error}));
+        yield put(actions.CHATS_ARQUIVO_DELETAR_FALURE(error));
     }
 }
 

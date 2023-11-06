@@ -15,7 +15,7 @@ function* Empresa({payload}){
         yield put(actions.EMPRESA_SUCCESS({... response.data}));
     }catch(error){
         console.log(error)
-        yield put(actions.EMPRESA_FALURE());
+        yield put(actions.EMPRESA_FALURE(error));
     }
 }
 

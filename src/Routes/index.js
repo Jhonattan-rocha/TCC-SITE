@@ -8,7 +8,7 @@ import Protected from './Protected';
 import Login from "../pages/Login";
 import NoPage from "../pages/NoPage";
 import CadastroEmpresa from "../pages/CadastrarEmpresa";
-import CadastroFilial from "../pages/CadastrarFilial";
+import Categorizacao from "../pages/Categorizacao";
 import CadastroFuncionario from "../pages/CadastrarFuncionario";
 import VisualizarChamados from "../pages/VisualizarChamados";
 import CriarChamados from '../pages/CriarChamado/index2';
@@ -42,10 +42,10 @@ export default function Rotas(){
                             <CadastroEmpresa></CadastroEmpresa>
                         </Protected>
                     }/>
-                    <Route path="/CadastroFilial" element={
-                        <Protected component={CadastroFilial} isClosed={true}>
+                    <Route path="/Categorizacao" element={
+                        <Protected component={Categorizacao} isClosed={true}>
                             <SubHeader></SubHeader>
-                            <CadastroFilial></CadastroFilial>
+                            <Categorizacao></Categorizacao>
                         </Protected>
                     }/>
                     <Route path="/CadastroFuncionario" element={

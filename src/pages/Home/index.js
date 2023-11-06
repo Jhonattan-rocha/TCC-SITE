@@ -9,7 +9,6 @@ import * as actionsChats from '../../store/modules/ChatsReducer/actions';
 import Pie from "./charts/pie";
 import Line from './charts/line';
 import Example from "./charts/syncronized";
-import SubHeader from "../../components/SubHeader";
 
 export default function Home(){
     const dispatch = useDispatch()

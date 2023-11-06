@@ -12,7 +12,7 @@ function* Login({payload}) {
         yield put(actions.LoginSuccess({ ...response.data }));
     }catch(err) {
         console.log(err)
-        yield put(actions.LoginFalure());
+        yield put(actions.LoginFalure(err));
     }
 }
 

@@ -13,7 +13,7 @@ function* Funcionario({payload}){
         console.log(response)
     }catch(error){
         console.log(error)
-        yield put(actions.FUNCIONARIOFALURE({erro: error}));
+        yield put(actions.FUNCIONARIOFALURE(error));
     }
 }
 
@@ -45,7 +45,7 @@ function* CriarFuncionarioComFoto({payload}){
         yield put(actions.FUNCIONARIO_BUSCARREQUEST({filter: 'id_empresa+eq+'+payload.id_empresa}));
     }catch(error){
         console.log(error)
-        yield put(actions.FUNCIONARIOFALURE({erro: error}));
+        yield put(actions.FUNCIONARIOFALURE(error));
     }
 }
 
@@ -77,7 +77,7 @@ function* EditarFuncionarioComFoto({payload}){
         yield put(actions.FUNCIONARIO_BUSCARREQUEST({filter: 'id_empresa+eq+'+payload.id_empresa}));
     }catch(error){
         console.log(error)
-        yield put(actions.FUNCIONARIO_EDITARFALURE({erro: error}));
+        yield put(actions.FUNCIONARIO_EDITARFALURE(error));
     }
 }
 
@@ -103,7 +103,7 @@ function* BuscarFuncionario({payload = {}}){
         const response = yield call(axios.get, `/funcionarios/?filter=${encodeURIComponent(payload.filter)}`, payload);
         yield put(actions.FUNCIONARIO_BUSCARSUCCESS({...response.data}));
     }catch(error){
-        yield put(actions.FUNCIONARIO_BUSCARFALURE({erro: error}));
+        yield put(actions.FUNCIONARIO_BUSCARFALURE(error));
     }
 }
 
@@ -121,7 +121,7 @@ function* Setores({payload = {}}){
         yield put(actions.SETORES_SUCCESS({...response.data}));
     }catch(error){
         console.log(error);
-        yield  put(actions.SETORES_FALURE({error}));
+        yield  put(actions.SETORES_FALURE(error));
     }
 }
 
@@ -137,7 +137,7 @@ function* CriarSetor({payload}){
         yield put(actions.SETORES_REQUEST());
     }catch(error){
         console.log(error);
-        yield put(actions.CRIAR_SETORES_FALURE({error}));
+        yield put(actions.CRIAR_SETORES_FALURE(error));
     }
 }
 
@@ -156,7 +156,7 @@ function* EditarSetor({payload}){
         yield put(actions.SETORES_REQUEST());
     }catch(error){
         console.log(error);
-        yield put(actions.EDITAR_SETORES_FALURE({error}));
+        yield put(actions.EDITAR_SETORES_FALURE(error));
     }
 }
 
@@ -175,7 +175,7 @@ function* DeletarSetor({payload}){
         yield put(actions.SETORES_REQUEST());
     }catch(error){
         console.log(error);
-        yield put(actions.DELETAR_SETORES_FALURE({error}));
+        yield put(actions.DELETAR_SETORES_FALURE(error));
     }
 }
 
@@ -193,7 +193,7 @@ function* Comentarios({payload = {}}){
         yield put(actions.COMENTARIO_BUSCAR_SUCCESS({...response.data}));
     }catch(error){
         console.log(error);
-        yield put(actions.COMENTARIO_BUSCAR_FALURE({error}));
+        yield put(actions.COMENTARIO_BUSCAR_FALURE(error));
     }
 }
 
@@ -209,7 +209,7 @@ function* CriarComentario({payload}){
         yield put(actions.COMENTARIO_BUSCAR_REQUEST({filter: 'id_chamado+eq+'+payload.id_chamado}))
     }catch(error){
         console.log(error);
-        yield put(actions.COMENTARIO_CRIAR_FALURE({error}));
+        yield put(actions.COMENTARIO_CRIAR_FALURE(error));
     }
 }
 
@@ -228,7 +228,7 @@ function* EditarComentario({payload}){
         yield put(actions.COMENTARIO_BUSCAR_REQUEST({filter: 'id_chamado+eq+'+payload.id_chamado}));
     }catch(error){
         console.log(error);
-        yield put(actions.COMENTARIO_EDITAR_FALURE({error}));
+        yield put(actions.COMENTARIO_EDITAR_FALURE(error));
     }
 }
 
@@ -247,7 +247,7 @@ function* DeletarComentario({payload}){
         yield put(actions.COMENTARIO_BUSCAR_REQUEST({filter: 'id_chamado+eq+'+payload.id_chamado}))
     }catch(error){
         console.log(error);
-        yield put(actions.COMENTARIO_DELETAR_FALURE({error}));
+        yield put(actions.COMENTARIO_DELETAR_FALURE(error));
     }
 }
 

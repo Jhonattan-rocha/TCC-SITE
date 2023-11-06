@@ -16,7 +16,7 @@ function* Chamado({payload}){
         yield put(actions.CHAMADOSREQUEST({filter: `id_funcionario_criador+eq+${iduser}`}));
     }catch(error){
         console.log(error);
-        yield  put(actions.ChamadoFALURE());
+        yield  put(actions.ChamadoFALURE(error));
     }
 }
  
@@ -31,7 +31,7 @@ function* Chamados({payload = {}}){
         yield put(actions.CHAMADOSSUCCESS({...response.data}));
     }catch(error){
         console.log(error)
-        yield put(actions.CHAMADOSFALURE());
+        yield put(actions.CHAMADOSFALURE(error));
     }
 }
 
@@ -45,7 +45,7 @@ function* EditarChamado({payload}){
         yield put(actions.CHAMADOSREQUEST({filter: `id_funcionario_criador+eq+${iduser}`}));
     }catch(error){
         console.log(error)
-        yield put(actions.EDITAR_CHAMADOFALURE())
+        yield put(actions.EDITAR_CHAMADOFALURE(error))
     }
 }
 
@@ -58,7 +58,7 @@ function* DeletarChamado({payload}){
         yield put(actions.DELETAR_CHAMADO_SUCCESS({...response.data}))
         yield put(actions.CHAMADOSREQUEST({filter: `id_funcionario_criador+eq+${iduser}`}));
     }catch(error){
-        yield put(actions.DELETAR_CHAMADO_FALURE())
+        yield put(actions.DELETAR_CHAMADO_FALURE(error))
     }
 }
 
@@ -76,7 +76,7 @@ function* Status({payload = {}}){
         yield put(actions.STAUTS_SUCCESS({...response.data}));
     }catch(error){
         console.log(error);
-        yield  put(actions.STATUS_FALURE({error}));
+        yield  put(actions.STATUS_FALURE(error));
     }
 }
 
@@ -96,7 +96,7 @@ function* GetStatus({payload}){
         yield put(actions.GET_STATUS_SUCCESS({...response.data}));
     }catch(error){
         console.log(error);
-        yield  put(actions.GET_STATUS_FALURE({error}));
+        yield  put(actions.GET_STATUS_FALURE(error));
     }
 }
 
@@ -113,7 +113,7 @@ function* CriarStatus({payload}){
         console.log(response)
     }catch(error){
         console.log(error);
-        yield put(actions.CRIAR_STATUS_FALURE({error}));
+        yield put(actions.CRIAR_STATUS_FALURE(error));
     }
 }
 
@@ -132,7 +132,7 @@ function* EditarStatus({payload}){
         yield put(actions.STATUS_REQUEST({ ...response.data }));
     }catch(error){
         console.log(error);
-        yield put(actions.EDITAR_STATUS_FALURE({error}));
+        yield put(actions.EDITAR_STATUS_FALURE(error));
     }
 }
 
@@ -151,7 +151,7 @@ function* DeletarStatus({payload}){
         yield put(actions.STATUS_REQUEST({ ...response.data }));
     }catch(error){
         console.log(error);
-        yield put(actions.DELETAR_STATUS_FALURE({error}));
+        yield put(actions.DELETAR_STATUS_FALURE(error));
     }
 }
 
@@ -165,7 +165,7 @@ function* ExecProcedure({payload = {}}){
         yield put(actions.ISLOADING({load: true}));
     }catch(error){
         console.log(error)
-        yield put(actions.EXEC_PROCEDURE_FALURE());
+        yield put(actions.EXEC_PROCEDURE_FALURE(error));
     }
 }
 
@@ -185,7 +185,7 @@ function* Categorias({payload = {}}){
         yield put(actions.CATEGORIAS_SUCCESS({...response.data}));
     }catch(error){
         console.log(error);
-        yield  put(actions.CATEGORIAS_FALURE({error}));
+        yield  put(actions.CATEGORIAS_FALURE(error));
     }
 }
 
@@ -201,7 +201,7 @@ function* CriarCategoria({payload}){
         yield put(actions.CATEGORIAS_REQUEST());
     }catch(error){
         console.log(error);
-        yield put(actions.CRIAR_CATEGORIAS_FALURE({error}));
+        yield put(actions.CRIAR_CATEGORIAS_FALURE(error));
     }
 }
 
@@ -220,7 +220,7 @@ function* EditarCategoria({payload}){
         yield put(actions.CATEGORIAS_REQUEST());
     }catch(error){
         console.log(error);
-        yield put(actions.EDITAR_CATEGORIAS_FALURE({error}));
+        yield put(actions.EDITAR_CATEGORIAS_FALURE(error));
     }
 }
 
@@ -239,7 +239,7 @@ function* DeletarCategoria({payload}){
         yield put(actions.CATEGORIAS_REQUEST());
     }catch(error){
         console.log(error);
-        yield put(actions.DELETAR_CATEGORIAS_FALURE({error}));
+        yield put(actions.DELETAR_CATEGORIAS_FALURE(error));
     }
 }
 
@@ -258,7 +258,7 @@ function* SubCategorias({payload = {}}){
         yield put(actions.SUBCATEGORIAS_SUCCESS({...response.data}));
     }catch(error){
         console.log(error);
-        yield  put(actions.SUBCATEGORIAS_FALURE({error}));
+        yield  put(actions.SUBCATEGORIAS_FALURE(error));
     }
 }
 
@@ -274,7 +274,7 @@ function* CriarSubCategoria({payload}){
         yield put(actions.SUBCATEGORIAS_REQUEST());
     }catch(error){
         console.log(error);
-        yield put(actions.CRIAR_SUBCATEGORIAS_FALURE({error}));
+        yield put(actions.CRIAR_SUBCATEGORIAS_FALURE(error));
     }
 }
 
@@ -293,7 +293,7 @@ function* EditarSubCategoria({payload}){
         yield put(actions.SUBCATEGORIAS_REQUEST());
     }catch(error){
         console.log(error);
-        yield put(actions.EDITAR_SUBCATEGORIAS_FALURE({error}));
+        yield put(actions.EDITAR_SUBCATEGORIAS_FALURE(error));
     }
 }
 
@@ -312,7 +312,7 @@ function* DeletarSubCategoria({payload}){
         yield put(actions.SUBCATEGORIAS_REQUEST());
     }catch(error){
         console.log(error);
-        yield put(actions.DELETAR_SUBCATEGORIAS_FALURE({error}));
+        yield put(actions.DELETAR_SUBCATEGORIAS_FALURE(error));
     }
 }
 
@@ -332,7 +332,7 @@ function* Arquivos({payload = {}}){
         yield put(actions.ARQUIVO_BUSCAR_SUCCESS({...response.data}));
     }catch(error){
         console.log(error);
-        yield put(actions.ARQUIVO_BUSCAR_FALURE({error}));
+        yield put(actions.ARQUIVO_BUSCAR_FALURE(error));
     }
 }
 
@@ -357,7 +357,7 @@ function* CriarArquivos({payload}){
         yield put(actions.ARQUIVO_CRIAR_SUCCESS({...response.data}));
     }catch(error){
         console.log(error);
-        yield put(actions.ARQUIVO_CRIAR_FALURE({...error}));
+        yield put(actions.ARQUIVO_CRIAR_FALURE(error));
     }
 }
 
@@ -376,7 +376,7 @@ function* EditarArquivo({payload}){
         
     }catch(error){
         console.log(error);
-        yield put(actions.ARQUIVO_EDITAR_FALURE({error}));
+        yield put(actions.ARQUIVO_EDITAR_FALURE(error));
     }
 }
 
@@ -395,7 +395,7 @@ function* DeletarArquivo({payload}){
         yield put(actions.ARQUIVO_BUSCAR_REQUEST({filter: 'id_chamado+eq+'+payload.id_chamado}));
     }catch(error){
         console.log(error);
-        yield put(actions.ARQUIVO_DELETAR_FALURE({error}));
+        yield put(actions.ARQUIVO_DELETAR_FALURE(error));
     }
 }
 

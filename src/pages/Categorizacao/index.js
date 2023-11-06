@@ -1,7 +1,7 @@
 import React from "react";
 
-import { Container, ListItem, SectionFour, SectionThree, SectionTwo } from "./styles";
-import { Form, SectionOne } from "./styles";
+import { Container, ListItem, SectionOne, SectionFour, SectionThree, SectionTwo } from "./styles";
+import { FaPlus, FaEdit, FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from '../../store/modules/chamadosreducer/actions';
 import * as actionsChats from '../../store/modules/ChatsReducer/actions';
@@ -13,20 +13,11 @@ import { create as subcategoria } from "../VisualizarChamados/components/criarsu
 import { edit as categoriaEdit } from "../VisualizarChamados/components/editarcategoria";
 import { edit as statusEdit } from "../VisualizarChamados/components/editarstatus";
 import { edit as subcategoriaEdit } from '../VisualizarChamados/components/editarsubcategoria';
-import { FaTrash, FaEdit, FaPlus } from "react-icons/fa";
-import { Legend } from "./styles";
 
-
-export default function CriarChamado(props){
+export default function CadastroFilial(){
 
     const dispatch = useDispatch();
-    const categoriasList = useSelector(state => state.chamadosreducer.categorias.result);
-    const subcategoriasList = useSelector(state => state.chamadosreducer.subCategorias.result)
-    const statuslist = useSelector(state => state.chamadosreducer.status.result);
 
-    const iduser = useSelector(state => {
-        return state.authreducer.user.id;
-    });
     const [openStatus, setOpenStatus] = React.useState(false);
     const [openCategoria, setOpenCategoria] = React.useState(false);
     const [openSubCategoria, setOpenSubCategoria] = React.useState(false);
@@ -36,27 +27,23 @@ export default function CriarChamado(props){
     const [causa, setCausa] = React.useState("");
     const [operador, setOperador] = React.useState("");
     const [descricao, setDescricao] = React.useState("");
+    const categoriasList = useSelector(state => state.chamadosreducer.categorias.result);
+    const subcategoriasList = useSelector(state => state.chamadosreducer.subCategorias.result)
+    const statuslist = useSelector(state => state.chamadosreducer.status.result);
     const [Status, setStatus] = React.useState(statuslist.length > 0 ? statuslist[0]: {nome: ''});
     const [categorias, setCategorias] = React.useState(categoriasList.length > 0 ? categoriasList[0]: {nome: ''});
     const [subcategorias, setSubCategorias] = React.useState(subcategoriasList.length > 0 ? subcategoriasList[0]: {nome: ''});
     const [titles, setTitles] = React.useState({status: Status.nome, categoria: categorias.nome, subcategoria: subcategorias.nome});
+
+    const iduser = useSelector(state => {
+        return state.authreducer.user.id;
+    });
 
     const onload = () => {
         dispatch(actions.STATUS_REQUEST());
         dispatch(actions.CHAMADOSREQUEST({filter: `id_funcionario_criador+eq+${iduser}`}));
         dispatch(actions.CATEGORIAS_REQUEST());
         dispatch(actions.SUBCATEGORIAS_REQUEST());
-    }
-
-    function handleSubmit(e){
-        e.preventDefault();
-        if(!causa || !operador || !descricao){
-            toast.error("Os valores principais não podem ser vaizos");
-            return;
-        }
-        dispatch(actions.ChamadoRequest({causa: causa, operador: operador, descricao: descricao, id_status: Status.id, id_funcionario_criador: iduser, categoria: categorias.id, subcategoria: subcategorias.id}))
-        dispatch(actionsChats.CHATS_CRIAR_REQUEST({titulo: causa, descricao: descricao, status: 'em aberto'}))
-        dispatch(actions.CHAMADOSREQUEST({filter: `id_funcionario_criador+eq+${iduser}`}));
     }
 
     
@@ -95,39 +82,16 @@ export default function CriarChamado(props){
 
     React.useEffect(() => {
         onload()
-    }, [])
+    }, []);
 
     return (
-        <>
-        <Container onLoad={() => dispatch(actions.STATUS_REQUEST())}>
-            {openStatus ? status(setOpenStatus, {nome: ""}): null}
-            {openCategoria ? categoria(setOpenCategoria): null}
-            {openSubCategoria ? subcategoria(setOpenSubCategoria): null}
-            {openCategoriaEdit ? categoriaEdit(setOpenCategoriaEdit, categorias): null}
-            {openStatusEdit ? statusEdit(setOpenStatusEdit, Status): null}
-            {openSubCategoriaEdit ? subcategoriaEdit(setOpenSubCategoriaEdit, subcategorias): null}
-            <Legend>
-                Cadastrar Chamados
-            </Legend>
-            
-            <Form onSubmit={(e) => handleSubmit(e)} onLoad={(e) => onload()}>
-                <div id="linha1">
-                    <div>
-                        <label htmlFor="causa">Causa</label>
-                        <input id="causa" value={causa} onChange={(e) => setCausa(e.target.value)}></input>
-                    </div>
-
-                    <div>
-                        <label htmlFor="operador">Operador</label>
-                        <input id="operador" value={operador} onChange={(e) => setOperador(e.target.value)}></input>
-                    </div>
-                </div>
-
-                <div id="area">
-                    <p>Descrição do Chamado</p>
-                    <textarea id="descricao" value={descricao} onChange={(e) => setDescricao(e.target.value)}></textarea>
-                </div>
-
+        <Container>
+                {openStatus ? status(setOpenStatus, {nome: ""}): null}
+                {openCategoria ? categoria(setOpenCategoria): null}
+                {openSubCategoria ? subcategoria(setOpenSubCategoria): null}
+                {openCategoriaEdit ? categoriaEdit(setOpenCategoriaEdit, categorias): null}
+                {openStatusEdit ? statusEdit(setOpenStatusEdit, Status): null}
+                {openSubCategoriaEdit ? subcategoriaEdit(setOpenSubCategoriaEdit, subcategorias): null}
                 <SectionOne>
                     <SectionTwo>
                         <div id="categoria">
@@ -223,11 +187,7 @@ export default function CriarChamado(props){
                         </div>    
                     </SectionFour>
                 </SectionOne>
-
-                <button type="submit">Cadastrar</button>
-            </Form>
         </Container>
-        </>
     );
 }
 

@@ -6,6 +6,9 @@
     justify-content: center;
     flex-direction: column;
     background-color: white;
+
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 /*fim Labels*/

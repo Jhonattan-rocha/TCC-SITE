@@ -1,7 +1,7 @@
 import React from "react";
 
 import '../style.css'
-import { Forms, Legend, Container, ButtonChamado, DropAreaStyled, DivChamadosList } from "../styles";
+import { ButtonChamado, DropAreaStyled, DivChamadosList } from "../styles";
 import { FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from '../../../store/modules/chamadosreducer/actions';
@@ -14,11 +14,10 @@ export default function ColumnComponent(){
 
     const dispatch = useDispatch();
 
-    const [filtroChamados, setFiltroChamados] = React.useState("my")
     const [listaChamados, setListaChamados] = React.useState([]);
-    const iduser = useSelector(state => state.authreducer.user.id);
-    const statuslist = useSelector(state => state.chamadosreducer.status.result || []);
-    const chamados = useSelector(state => state.chamadosreducer.chamados.result || []);
+    const statuslist = useSelector(state => state.chamadosreducer.status.result);
+    const chamados = useSelector(state => state.chamadosreducer.chamados.result);
+
     const [listaChamadosOpen, setlistaChamadosOpen] = React.useState({});
 
     React.useEffect(() => {
@@ -26,9 +25,9 @@ export default function ColumnComponent(){
     }, [chamados])
 
     React.useEffect(() => {
-        statuslist.map(status => {
+        statuslist.forEach(status => {
             listaChamadosOpen[status.id] = true
-        }) 
+        })
     }, [statuslist])
 
     const handleDrop = (event, status) => {
