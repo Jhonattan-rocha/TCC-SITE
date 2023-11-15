@@ -9,7 +9,7 @@ function* Funcionario({payload}){
         axios.defaults.headers.Authorization = `Bearer ` + token;
         const response = yield call(axios.post, `/funcionario/`, payload);
         yield put(actions.FUNCIONARIOSUCCESS({...response.data}));
-        yield put(actions.FUNCIONARIO_BUSCARREQUEST({filter: 'id_empresa+eq+'+payload.id_empresa}))
+        yield put(actions.FUNCIONARIO_BUSCARREQUEST())
         console.log(response)
     }catch(error){
         console.log(error)
@@ -42,7 +42,7 @@ function* CriarFuncionarioComFoto({payload}){
 
         const response = yield call(axios.post, `/funcionario/`, payload);
         yield put(actions.FUNCIONARIOSUCCESS({...response.data}));
-        yield put(actions.FUNCIONARIO_BUSCARREQUEST({filter: 'id_empresa+eq+'+payload.id_empresa}));
+        yield put(actions.FUNCIONARIO_BUSCARREQUEST());
     }catch(error){
         console.log(error)
         yield put(actions.FUNCIONARIOFALURE(error));
@@ -74,7 +74,7 @@ function* EditarFuncionarioComFoto({payload}){
 
         const response = yield call(axios.put, `/funcionario/${payload.id}`, payload);
         yield put(actions.FUNCIONARIO_EDITARSUCCESS({...response.data}));
-        yield put(actions.FUNCIONARIO_BUSCARREQUEST({filter: 'id_empresa+eq+'+payload.id_empresa}));
+        yield put(actions.FUNCIONARIO_BUSCARREQUEST());
     }catch(error){
         console.log(error)
         yield put(actions.FUNCIONARIO_EDITARFALURE(error));
@@ -87,7 +87,7 @@ function* EditarFuncionario({payload}){
         axios.defaults.headers.Authorization = `Bearer ` + token;
         const response = yield call(axios.put, `/funcionario/${payload.id}`, payload);
         yield put(actions.FUNCIONARIO_EDITARSUCCESS({...response.data}));
-        yield put(actions.FUNCIONARIO_BUSCARREQUEST({filter: 'id_empresa+eq+'+payload.id_empresa}));
+        yield put(actions.FUNCIONARIO_BUSCARREQUEST());
     }catch(error){
         yield put(actions.FUNCIONARIO_EDITARFALURE({erro: error}));
     };

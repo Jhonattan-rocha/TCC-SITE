@@ -34,7 +34,8 @@ export default function EditarSubCategoria(props){
 
     const [nome, setNome] = React.useState(props.subcategoria.nome);
     const [pri, setPri] = React.useState(props.subcategoria.prioridade);
-    const [categoria, setCategoria] = React.useState(props.subcategoria.categoria);
+    const [categoria, setCategoria] = React.useState(props.subcategoria.id_categoria);
+
 
     return (
         <>

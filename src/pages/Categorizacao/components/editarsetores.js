@@ -20,15 +20,23 @@ export default function EditarSetor(props){
     const dispatch = useDispatch();
     const funcionarios = useSelector(state => state.funcionarioreducer.funcionarios.result);
 
+    console.log(funcionarios, props.setor);
+    const resp = funcionarios.find(fun => {
+        console.log(fun.setor_responsavel, props.setor.id);
+        return fun.setor_responsavel === props.setor.id
+    });
+
+
     function handleSubmit(e){
         e.preventDefault();
-        dispatch(actions.EDITAR_SETORES_REQUEST({id: props.setor.id, nome: nome, responsavel: responsavel}))
+        dispatch(actions.EDITAR_SETORES_REQUEST({id: props.setor.id, nome: nome, responsavel: responsavel}));
+        dispatch(actions.FUNCIONARIO_EDITARREQUEST({id: responsavel, setor_responsavel: props.setor.id}));
         dispatch(actions.SETORES_REQUEST());
         props.close(false);
     }
 
     const [nome, setNome] = React.useState(props.setor.nome);
-    const [responsavel, setResponsavel] = React.useState(props.setor.responsavel);
+    const [responsavel, setResponsavel] = React.useState(resp ? resp.id: funcionarios[0].id);
 
     return (
         <>

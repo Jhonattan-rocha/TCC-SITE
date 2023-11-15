@@ -53,7 +53,7 @@ export default function CriarChamado(props){
     const [operador, setOperador] = React.useState("");
     const [descricao, setDescricao] = React.useState("");
 
-    const defaultStatusOption = statuslist.find(status => status.default) || statuslist[0];
+    const defaultStatusOption = statuslist.find(status => status.default) || statuslist[0] || 0;
 
     const [Status, setStatus] = React.useState(defaultStatusOption.id);
     const [categoria, setCategoria] = React.useState(categoriasList.length > 0 ? categoriasList[0].id: 0);
