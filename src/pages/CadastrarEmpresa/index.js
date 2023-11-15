@@ -54,7 +54,6 @@ export default function CadastroEmpresa(){
     }
 
     return (
-        <>
             <Container>
                 <div className="divCentralizarEmpresa">
                 <Form onSubmit={(e) => handleSubmit(e)}>
@@ -137,7 +136,6 @@ export default function CadastroEmpresa(){
                 </Form>
                 </div>
             </Container>
-        </>
     );
 }
 

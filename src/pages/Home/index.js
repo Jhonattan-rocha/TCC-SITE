@@ -22,6 +22,7 @@ export default function Home(){
         dispatch(actions.CHAMADOSREQUEST({filter: `id_funcionario_criador+eq+${iduser}`}));
         dispatch(actions.CATEGORIAS_REQUEST());
         dispatch(actions.SUBCATEGORIAS_REQUEST());
+        dispatch(actionsFuncionario.CARGOS_REQUEST());
         dispatch(actions.EXEC_PROCEDURE_REQUEST({query: 'call CountChamados();'}));
         dispatch(actionsFuncionario.SETORES_REQUEST());
         dispatch(actionsFuncionario.FUNCIONARIO_BUSCARREQUEST());

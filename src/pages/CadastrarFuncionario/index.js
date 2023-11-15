@@ -1,35 +1,58 @@
 import React from "react";
 
 import './main.css'
-import { Form, Container, ButtonAcordion, Legend, InputMask as ReactInputMask, DivLinha, DivColuna, DropDownSetores, DivBotoesFuncionariosNavegacao, FuncionarioItem } from "./styles";
+import { Form, Container, ButtonAcordion, Legend, InputMask as ReactInputMask, DivLinha, DivColuna, DropDownSetores, DivBotoesFuncionariosNavegacao, FuncionarioItem, DropDownCargos } from "./styles";
 import { Painel } from "./styles";
-import { FaEdit, FaPlus, FaTrash, FaWindowMinimize } from "react-icons/fa";
+import { FaPlus, FaWindowMinimize } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../store/modules/funcionarioreducer/actions';
 import { toast } from 'react-toastify';
-import { create as CreateSetor } from './components/criarsetores';
-import { edit as EditSetor } from './components/editarsetores';
+import { create as CreateSetor } from '../Categorizacao/components/criarsetores';
+import { edit as EditSetor } from '../Categorizacao/components/editarsetores';
 import UploadPhoto from "../../components/UploadPhoto";
 import { AiOutlineOrderedList, AiOutlineUserAdd } from "react-icons/ai";
 import EditarFuncionario from './components/EditarFuncionario';
 
 export default function CadastroFuncionario(){
 
-    const [departamento, setDepartamento] = React.useState();
-    const [nome, setNome] = React.useState();
-    const [email, setEmail] = React.useState();
-    const [telefone, setTelefone] = React.useState();
-    const [endereco, setEndereco] = React.useState();
-    const [bairro, setBairro] = React.useState();
+    const dispatch = useDispatch();
+    const setores = useSelector(state => {
+        try{
+            return state.funcionarioreducer.setores.result
+        }catch(err){
+            return []
+        }
+    });
+    const funcionarios = useSelector(state => {
+        try{
+            return state.funcionarioreducer.funcionarios.result;
+        }catch(err){
+            return []
+        }
+    });
+    const cargoslist = useSelector(state => {
+        try{
+            return state.funcionarioreducer.cargos.result;
+        }catch(err){
+            return [];
+        }
+    });
+
+    const [departamento, setDepartamento] = React.useState("");
+    const [nome, setNome] = React.useState("");
+    const [email, setEmail] = React.useState("");
+    const [telefone, setTelefone] = React.useState("");
+    const [endereco, setEndereco] = React.useState("");
+    const [bairro, setBairro] = React.useState("");
     const [status, setStatus] = React.useState("inativo");
-    const [password, setPassword] = React.useState();
-    const [confirmpassword, setConfirmpassword] = React.useState();
-    const [cpf, setCPF] = React.useState();
-    const [numero, setNumero] = React.useState();
-    const [cep, setCep] = React.useState();
-    const [cargo, setCargo] = React.useState();
-    const [nivel, setNivel] = React.useState();
-    const [setor, setSetor] = React.useState();
+    const [password, setPassword] = React.useState("");
+    const [confirmpassword, setConfirmpassword] = React.useState("");
+    const [cpf, setCPF] = React.useState("");
+    const [numero, setNumero] = React.useState("");
+    const [cep, setCep] = React.useState("");
+    const [cargo, setCargo] = React.useState(cargoslist.length > 0 ? cargoslist[0].id: 0);
+    const [nivel, setNivel] = React.useState("");
+    const [setor, setSetor] = React.useState(setores.length > 0 ? setores[0].id: 0);
 
     const [isOpen1, setIsOpen1] = React.useState(false);
     const [isOpen2, setIsOpen2] = React.useState(false);
@@ -42,21 +65,6 @@ export default function CadastroFuncionario(){
     const user = useSelector(state => state.authreducer);
     const [mostrar, setMostrar] = React.useState("cad");
     const [funcionarioSelecionado, setFuncionarioSelecionado] = React.useState({});
-    const dispatch = useDispatch();
-    const setores = useSelector(state => {
-        try{
-            return state.funcionarioreducer.setores.result
-        }catch(err){
-            return []
-        }
-    });
-    const funcionarios = useSelector(state => {
-        try{
-            return state.funcionarioreducer.funcionarios.result
-        }catch(err){
-            return []
-        }
-    });
 
     function handleSubmit(e){
         e.preventDefault();
@@ -85,6 +93,7 @@ export default function CadastroFuncionario(){
                 password: password,
                 id_empresa: user.user.id,
                 setor: setor,
+                id_cargo: cargo,
                 photo: dados}));
         }else{
             dispatch(actions.FUNCIONARIOREQUEST({departamento: departamento, 
@@ -97,6 +106,7 @@ export default function CadastroFuncionario(){
                 cep: `${String(cep).replace(/\D/g, )}`, 
                 cpf: cpf,
                 setor: setor,
+                id_cargo: cargo,
                 password: password,
                 id_empresa: user.user.id}));
         }
@@ -104,18 +114,6 @@ export default function CadastroFuncionario(){
         setMostrar('list');      
 
     }
-
-    function handleDelete(e){
-        e.preventDefault();
-        dispatch(actions.DELETAR_SETORES_REQUEST({id: setor}));
-        
-    }
-
-    React.useEffect(() => {
-        if(setores.length > 0){
-            setSetor(setores[0].id)
-        }
-    }, [])
 
     return (
             <div className="divContainerPrincipal">
@@ -145,9 +143,15 @@ export default function CadastroFuncionario(){
                                             <label className="globalLab">Departamento: </label>
                                             <ReactInputMask id="labdepartamento" className="razaoS" type="text" placeholder="Digite o departamento" value={departamento} onChange={(e) => setDepartamento(e.target.value)} required></ReactInputMask>
                                         </div>
-                                        <div className="element">
-                                            <label className="globalLab">Cargo: </label>
-                                            <ReactInputMask id="labcargo" className="razaoS" type="text" placeholder="Digite o cargo" value={cargo} onChange={(e) => setCargo(e.target.value)} required></ReactInputMask>
+                                        <div>
+                                            <label>Cargo</label>
+                                            <div>
+                                                <DropDownCargos value={cargo} placeholder="Cargo" onChange={(e) => setCargo(e.target.value)}>
+                                                    {cargoslist.map(car => (
+                                                        <option key={car.id} value={car.id}>{car.nome}</option>
+                                                    ))}
+                                                </DropDownCargos>
+                                            </div>
                                         </div>
                                     </DivLinha>
 
@@ -207,9 +211,6 @@ export default function CadastroFuncionario(){
                                                     <option key={setor.id} value={setor.id}>{setor.nome}</option>
                                                 ))}
                                             </DropDownSetores>
-                                            <FaPlus onClick={(e) => setisOpenCreate(!isOpenCreate)}></FaPlus>
-                                            <FaEdit onClick={(e) => setisOpenEditar(!isOpenEditar)}></FaEdit>
-                                            <FaTrash onClick={(e) => handleDelete(e)}></FaTrash>
                                         </div>
                                     </div>
 

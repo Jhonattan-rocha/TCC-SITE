@@ -1,5 +1,6 @@
 import { call, put, all, takeLatest, select } from 'redux-saga/effects';
 import * as actions from './actions';
+import * as actionsFuncionarios from '../funcionarioreducer/actions';
 import * as types from '../types';
 import axios from '../../../services/axios';
 
@@ -13,6 +14,22 @@ function* Chamado({payload}){
           };
         const response = yield call(axios.post, "/chamado/", payload);
         yield put(actions.ChamadoSUCCESS({...response.data}));
+        
+        console.log(response.data)
+        if(payload.anexos.length > 0){
+            for(let anexo of payload.anexos){
+                anexo.id_chamado = response.data.result.id
+                yield put(actions.ARQUIVO_CRIAR_REQUEST(anexo));
+            }
+        }
+
+        if(payload.comentarios.length > 0){
+            for(let comentario of payload.comentarios){
+                let dados = {conteudo: comentario, id_chamado: response.data.result.id, id_funcionario_criador: iduser};
+                yield put(actionsFuncionarios.COMENTARIO_CRIAR_REQUEST(dados));
+            }
+        }
+
         yield put(actions.CHAMADOSREQUEST({filter: `id_funcionario_criador+eq+${iduser}`}));
     }catch(error){
         console.log(error);

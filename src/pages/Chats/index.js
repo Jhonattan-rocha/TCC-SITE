@@ -58,12 +58,12 @@ export default function Chats(props) {
               })}
             </div>
           </DivListaDeChamados>
-          {chat !== null ? 
+          {chat ? 
             <DivChat>
               <DivChatTitle onClick={() => setOpenConfig(!openConfig)}>
                 <UploadPhoto preView={false} size={{container: 70, img: 120}} change={false} file_name={(() => {
-                  const profile = chat.arquivos.filter(file => file.id === chat.id_foto)[0]
                   try{
+                    const profile = chat.arquivos.filter(file => file.id === chat.id_foto)[0]
                     return profile.file_name;
                   }catch(err){
                     return ''

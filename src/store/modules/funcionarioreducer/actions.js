@@ -83,6 +83,96 @@ export function FUNCIONARIO_EDITAR_COM_FOTO(payload){
     };
 }
 
+// ------------------------------------------------
+
+
+export function CARGOS_REQUEST(payload){
+    return {
+        type: types.CARGOS_REQUEST,
+        payload: payload,  
+    };
+}
+
+export function CARGOS_SUCCESS(payload){
+    return {
+        type: types.CARGOS_SUCCESS,
+        payload: payload,  
+    };
+}
+
+export function CARGOS_FALURE(payload){
+    return {
+        type: types.CARGOS_FALURE,
+        payload: payload,  
+    };
+}
+
+
+export function CRIAR_CARGO_REQUEST(payload){
+    return {
+        type: types.CRIAR_CARGO_REQUEST,
+        payload: payload,  
+    };
+}
+
+export function CRIAR_CARGO_SUCCESS(payload){
+    return {
+        type: types.CRIAR_CARGO_SUCCESS,
+        payload: payload,  
+    };
+}
+
+export function CRIAR_CARGO_FALURE(payload){
+    return {
+        type: types.CRIAR_CARGO_FALURE,
+        payload: payload,  
+    };
+}
+
+export function EDITAR_CARGO_REQUEST(payload){
+    return {
+        type: types.EDITAR_CARGO_REQUEST,
+        payload: payload,  
+    };
+}
+
+export function EDITAR_CARGO_SUCCESS(payload){
+    return {
+        type: types.EDITAR_CARGO_SUCCESS,
+        payload: payload,  
+    };
+}
+
+export function EDITAR_CARGO_FALURE(payload){
+    return {
+        type: types.EDITAR_CARGO_FALURE,
+        payload: payload,  
+    };
+}
+
+
+export function DELETAR_CARGO_REQUEST(payload){
+    return {
+        type: types.DELETAR_CARGO_REQUEST,
+        payload: payload,  
+    };
+}
+
+export function DELETAR_CARGO_SUCCESS(payload){
+    return {
+        type: types.DELETAR_CARGO_SUCCESS,
+        payload: payload,  
+    };
+}
+
+export function DELETAR_CARGO_FALURE(payload){
+    return {
+        type: types.DELETAR_CARGO_FALURE,
+        payload: payload,  
+    };
+}
+
+
 // -------------------------------------------------
 
 

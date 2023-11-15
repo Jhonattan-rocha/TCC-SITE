@@ -252,6 +252,77 @@ function* DeletarComentario({payload}){
 }
 
 
+function* Cargos({payload = {}}){
+    try{
+        if(!payload.filter){
+            payload.filter = ""
+        }
+        const token = yield select(state => state.authreducer.token);
+        axios.defaults.headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          };
+        const response = yield call(axios.get, `/cargos/?filter=${encodeURIComponent(payload.filter)}`, payload);
+        yield put(actions.CARGOS_SUCCESS({...response.data}));
+    }catch(error){
+        console.log(error);
+        yield  put(actions.CARGOS_FALURE({error}));
+    }
+}
+
+function* CriarCargo({payload}){
+    try{
+        const token = yield select(state => state.authreducer.token);
+        axios.defaults.headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          };
+        const response = yield call(axios.post, `/cargo/`, payload);
+        yield put(actions.CRIAR_CARGO_SUCCESS({...response.data}));
+        yield put(actions.CARGOS_REQUEST());
+    }catch(error){
+        console.log(error);
+        yield put(actions.CRIAR_CARGO_FALURE({error}));
+    }
+}
+
+function* EditarCargo({payload}){
+    try{
+        if(!payload.id){
+            return 
+        }
+        const token = yield select(state => state.authreducer.token);
+        axios.defaults.headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          };
+        const response = yield call(axios.put, `/cargo/${payload.id}`, payload);
+        yield put(actions.EDITAR_CARGO_SUCCESS({...response.data}));
+        yield put(actions.CARGOS_REQUEST());
+    }catch(error){
+        console.log(error);
+        yield put(actions.EDITAR_CARGO_FALURE({error}));
+    }
+}
+
+function* DeletarCargo({payload}){
+    try{
+        if(!payload.id){
+            return 
+        }
+        const token = yield select(state => state.authreducer.token);
+        axios.defaults.headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          };
+        const response = yield call(axios.delete, `/cargo/${payload.id}`, payload);
+        yield put(actions.DELETAR_CARGO_SUCCESS({...response.data}));
+        yield put(actions.CARGOS_REQUEST());
+    }catch(error){
+        console.log(error);
+        yield put(actions.DELETAR_CARGO_FALURE({error}));
+    }
+}
 
 export default all([
     takeLatest(types.FUNCIONARIO_REQUEST, Funcionario),
@@ -267,4 +338,8 @@ export default all([
     takeLatest(types.COMENTARIO_DELETAR_REQUEST, DeletarComentario),
     takeLatest(types.FUNCIONARIO_CRIAR_COM_FOTO, CriarFuncionarioComFoto),
     takeLatest(types.FUNCIONARIO_EDITAR_COM_FOTO, EditarFuncionarioComFoto),
+    takeLatest(types.CARGOS_REQUEST, Cargos),
+    takeLatest(types.CRIAR_CARGO_REQUEST, CriarCargo),
+    takeLatest(types.EDITAR_CARGO_REQUEST, EditarCargo),
+    takeLatest(types.DELETAR_CARGO_REQUEST, DeletarCargo),
 ]);

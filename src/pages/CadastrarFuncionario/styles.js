@@ -147,6 +147,13 @@ export const DropDownSetores = styled.select`
     border-radius: 5px;
 `;
 
+export const DropDownCargos = styled.select`
+    width: 100px;
+    border: 1px solid rgba(0,0,0,0.1);
+    padding: 3px;
+    border-radius: 5px;
+`;
+
 export const DivBotoesFuncionariosNavegacao = styled.div`
     display: flex;
     align-items: center;

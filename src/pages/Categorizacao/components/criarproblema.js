@@ -2,7 +2,9 @@ import React from "react";
 import { Form } from "./styled";
 import { FaWindowClose } from 'react-icons/fa';
 import { useDispatch } from "react-redux";
-import { Container, DivOverLay, DivPopUp } from "./styled";
+import { Container } from "./styled";
+import { DivOverLay, DivPopUp } from '../../../components/styled';
+
 import * as actions from '../../../store/modules/chamadosreducer/actions';
 
 export function create(close){

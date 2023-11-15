@@ -15,8 +15,8 @@ export const Form = styled.form`
 
 
 export const Container = styled.div`
-    width: 80%;
-    height: 80%;
+    width: 100%;
+    height: 100%;
     margin: auto;
     display: flex;
     justify-content: start;
@@ -24,6 +24,9 @@ export const Container = styled.div`
     align-items: center;
     flex-grow: 1;
     position: relative;
+
+    overflow: scroll;
+    overflow-x: hidden;
 `;
 
 export const Legend = styled.legend`

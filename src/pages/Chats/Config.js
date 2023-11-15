@@ -10,13 +10,14 @@ import { FaTrash } from "react-icons/fa";
 export default function Config(props){
 
     const [open, setOpen] = React.useState(props.open);
-    const chat = props.chat
+    const chat = props.chat;
     const dispatch = useDispatch();
     const [titulo, setTitulo] = React.useState(chat.titulo);
     const [descricao, setDescricao] = React.useState(chat.descricao);
     const [img, setImg] = React.useState("");
 
-    const profile = chat.arquivos.filter(file => file.id === chat.id_foto)[0]
+    const profile = Object.keys(chat).length > 0 ? chat.arquivos.filter(file => file.id === chat.id_foto)[0]:"";
+    
     return (
         <Sidebar open={open}>
             <DivContainerConfig>
@@ -31,7 +32,7 @@ export default function Config(props){
                 <Input value={titulo} multiline={false} onChange={(e) => setTitulo(e.target.value)}></Input>
                 <TextArea value={descricao} multiline={true} onChange={(e) => setDescricao(e.target.value)}></TextArea>
                 <DivArquivos>
-                    {chat.arquivos.map(file => {
+                    {chat.arquivos ? chat.arquivos.map(file => {
                         return (
                             <ListItem  key={file.id}>
                                 <p>{file.original_name}</p>
@@ -43,7 +44,7 @@ export default function Config(props){
                                 }}></FaTrash>
                             </ListItem>
                         );
-                    })}
+                    }): null}
                 </DivArquivos>
                 <button title="Salvar" type="button" style={{color: 'white', alignSelf: 'center'}} onClick={(e) => {
                     if(img){

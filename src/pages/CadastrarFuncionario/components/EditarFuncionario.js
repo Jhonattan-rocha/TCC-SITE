@@ -2,12 +2,13 @@ import React from "react";
 
 import { Form, ContainerFuncionario, ButtonAcordion, Legend, InputMask as ReactInputMask, DivLinha, DivColuna, DropDownSetores } from "./styled";
 import { Painel } from "./styled";
+import { DropDownCargos } from "../styles";
 import { FaEdit, FaPlus, FaTrash, FaWindowMinimize } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../../store/modules/funcionarioreducer/actions';
 import * as actionsArquivos from '../../../store/modules/chamadosreducer/actions';
-import { create as CreateSetor } from './criarsetores';
-import { edit as EditSetor } from './editarsetores';
+import { create as CreateSetor } from '../../Categorizacao/components/criarsetores';
+import { edit as EditSetor } from '../../Categorizacao/components/editarsetores';
 import UploadPhoto from "../../../components/UploadPhoto";
 
 export default function EditarFuncionario({funcionario = {}, close = () => {}}){
@@ -40,6 +41,13 @@ export default function EditarFuncionario({funcionario = {}, close = () => {}}){
             return state.funcionarioreducer.setores.result
         }catch(err){
             return []
+        }
+    });
+    const cargoslist = useSelector(state => {
+        try{
+            return state.funcionarioreducer.cargos.result;
+        }catch(err){
+            return [];
         }
     });
 
@@ -118,9 +126,15 @@ export default function EditarFuncionario({funcionario = {}, close = () => {}}){
                                         <label className="globalLab">Departamento: </label>
                                         <ReactInputMask id="labdepartamento" className="razaoS" type="text" placeholder="Digite o departamento" value={departamento} onChange={(e) => setDepartamento(e.target.value)} ></ReactInputMask>
                                     </div>
-                                    <div className="element">
-                                        <label className="globalLab">Cargo: </label>
-                                        <ReactInputMask id="labcargo" className="razaoS" type="text" placeholder="Digite o cargo" value={cargo} onChange={(e) => setCargo(e.target.value)} ></ReactInputMask>
+                                    <div>
+                                        <label>Cargo</label>
+                                        <div>
+                                            <DropDownCargos value={cargo} placeholder="Cargo" onChange={(e) => setCargo(e.target.value)}>
+                                                {cargoslist.map(car => (
+                                                    <option key={car.id} value={car.id}>{car.nome}</option>
+                                                ))}
+                                            </DropDownCargos>
+                                        </div>
                                     </div>
                                 </DivLinha>
 

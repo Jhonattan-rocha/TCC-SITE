@@ -5,6 +5,7 @@ const initialState = {
   funcionarios: {result: []},
   setores: {result: []},
   comentarios: {result: []},
+  cargos: {result: []},
 }
 // caso precise de mais de um reducer, usar a função combineReducer
 
@@ -76,6 +77,40 @@ export default function recuder(state = initialState, action){
         const newState = {...state}
         newState.comentarios = action.payload;
         return newState
+      }
+      case type.CARGOS_SUCCESS: {
+        toast.success("Cargos buscados com sucesso")
+        const newState = {...state};
+        newState.cargos = action.payload;
+        return newState;
+      }
+      case type.CARGOS_FALURE: {
+        toast.error("Erro ao buscar os cargos");
+        return state;
+      }
+      case type.CRIAR_CARGO_SUCCESS: {
+        toast.success("Cargo cadastrado com sucesso");
+        return state;
+      }
+      case type.CRIAR_CARGO_FALURE: {
+        toast.error("Erro ao cadastrar o cargo");
+        return state;
+      }
+      case type.EDITAR_CARGO_SUCCESS: {
+        toast.success("Cargo editado com sucesso");
+        return state;
+      }
+      case type.EDITAR_CARGO_FALURE: {
+        toast.error("Erro ao editar o cargo");
+        return state;
+      }
+      case type.DELETAR_CARGO_SUCCESS: {
+        toast.success("Cargo deletado com sucesso");
+        return state;
+      }
+      case type.DELETAR_CARGO_FALURE: {
+        toast.error("Erro ao deletar o cargo");
+        return state;
       }
       // aqui você pode definir suas ações e como o estado deve ser atualizado
       default:

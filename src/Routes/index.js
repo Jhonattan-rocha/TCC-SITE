@@ -37,7 +37,7 @@ export default function Rotas(){
                         </Protected>
                     }/>
                     <Route path="/CadastroEmpresa" element={
-                        <Protected component={CadastroEmpresa} isClosed={true}>
+                        <Protected component={CadastroEmpresa} isClosed={false}>
                             <SubHeader></SubHeader>
                             <CadastroEmpresa></CadastroEmpresa>
                         </Protected>

@@ -1,5 +1,5 @@
 import React from "react";
-import { FormEditar, SectionFour, SectionOne, SectionThree, SectionTwo, ButtonAttachFile } from "./styled";
+import { FormEditar, SectionFour, SectionOne, SectionThree, SectionTwo, ButtonAttachFile } from "../../Categorizacao/components/styled";
 import { FaWindowClose } from 'react-icons/fa';
 import { useDispatch, useSelector } from "react-redux";
 import { ContainerEditar } from "./styled";
