@@ -7,6 +7,7 @@ import { DivOverLay, DivPopUp } from '../../../components/styled';
 
 import * as actions from '../../../store/modules/chamadosreducer/actions';
 import * as actionsFuncionarios from '../../../store/modules/funcionarioreducer/actions';
+import * as actionsChats from '../../../store/modules/ChatsReducer/actions';
 import { toast } from "react-toastify";
 import { FaTrash, FaDownload } from 'react-icons/fa';
 import { AiOutlineSend } from "react-icons/ai";
@@ -227,12 +228,14 @@ export default function EditarChamado(props){
                                 <MdAttachFile size={30}></MdAttachFile>
                             </UploadControl>
                         </ButtonAttachFile>
-                        <button id="submit" type="button" onClick={(e) => handleSubmit(e)} hidden={funcResp !== user.user.id ? false: true}>Editar</button>
-                        {user.user.id !== props.chamado.id_funcionario_criador ? 
+                        <button id="submit" type="button" onClick={(e) => handleSubmit(e)} hidden={funcResp === user.user.id ? false: true}>Editar</button>
+                        {user.user.id !== props.chamado.id_funcionario_criador && !funcResp ? 
+                        
                         <button id="submit-resp" type="button" onClick={() => {
                             toast.success("Sucesso");
                             setFuncResp(user.user.id);
-                            dispatch(actions.EDITAR_CHAMADOREQUEST({id: props.chamado.id, causa: causa, operador: operador, descricao: descricao, id_status: Status, id_funcionario_resp: user.user.id, categoria: categoria}))
+                            dispatch(actions.EDITAR_CHAMADOREQUEST({id: props.chamado.id, id_funcionario_resp: user.user.id}));
+                            dispatch(actionsChats.CRIAR_USER_REQUEST({iduser: user.user.id, nome: user.user.nome, idchat: props.chamado.id}));
                         }}>Responsabilizar-se</button>:null
                         }
                     </div>

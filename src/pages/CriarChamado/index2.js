@@ -27,7 +27,6 @@ export default function CriarChamado(props){
         }
         console.log("aaaa")
         dispatch(actions.ChamadoRequest({id_funcionario_criador: user.user.id, causa: causa, operador: operador, descricao: descricao, id_status: Status, categoria: categoria, subcategoria: subcategoria, anexos: arquivos, comentarios: comentarios}));
-        dispatch(actionsChats.CHATS_CRIAR_REQUEST({titulo: causa, descricao: descricao, status: 'em aberto'}));
         dispatch(actions.CHAMADOSREQUEST({filter: `id_funcionario_criador+eq+${user.user.id}`}));
     }
     const UploadControl = ({ children, value, onChange, disabled, accept }) => {

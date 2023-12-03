@@ -16,6 +16,10 @@ export default function Config(props){
     const [descricao, setDescricao] = React.useState(chat.descricao);
     const [img, setImg] = React.useState("");
 
+    if(open === false){
+        dispatch(actions.CHATS_BUSCAR_REQUEST());
+    }
+
     const profile = Object.keys(chat).length > 0 ? chat.arquivos.filter(file => file.id === chat.id_foto)[0]:"";
     
     return (
@@ -52,9 +56,6 @@ export default function Config(props){
                     }else{
                         dispatch(actions.CHATS_EDITAR_REQUEST({id: chat.id, titulo: titulo, descricao: descricao}))
                     }
-                    setTimeout(() => {
-                        dispatch(actions.CHATS_BUSCAR_REQUEST());
-                    }, 2000)
                     setOpen(false);
                     props.setClose(false);
                 }}>Salvar</button>

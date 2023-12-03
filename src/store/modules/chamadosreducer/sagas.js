@@ -1,5 +1,6 @@
 import { call, put, all, takeLatest, select } from 'redux-saga/effects';
 import * as actions from './actions';
+import * as actionsChats from '../ChatsReducer/actions';
 import * as actionsFuncionarios from '../funcionarioreducer/actions';
 import * as types from '../types';
 import axios from '../../../services/axios';
@@ -8,6 +9,7 @@ function* Chamado({payload}){
     try{
         const token = yield select(state => state.authreducer.token);
         const iduser = yield select(state => state.authreducer.user.id);
+        const username = yield select(state => state.authreducer.user.nome);
         axios.defaults.headers = {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -29,6 +31,8 @@ function* Chamado({payload}){
                 yield put(actionsFuncionarios.COMENTARIO_CRIAR_REQUEST(dados));
             }
         }
+
+        yield put(actionsChats.CHATS_CRIAR_REQUEST({id: response.data.result.id, titulo: response.data.result.causa, descricao: response.data.result.descricao, status: 'em aberto', iduser: iduser, username: username}))
 
         yield put(actions.CHAMADOSREQUEST({filter: `id_funcionario_criador+eq+${iduser}`}));
     }catch(error){

@@ -11,6 +11,7 @@ import Chamado from "./chamado";
     const daysInMonth = new Date(currentDate.getFullYear(), monthMain+1, 0).getDate(); // Obtenha o número de dias no mês atual
     
     const dispatch = useDispatch();
+    const user = useSelector(state => state.authreducer);
     const chamadoslist = useSelector(state => state.chamadosreducer.chamados.result) ?? [];
     const statuslist = useSelector(state => state.chamadosreducer.status.result) ?? [];
     const [chamadosMostrar, setChamadosMostrar] = useState([]);
@@ -24,6 +25,7 @@ import Chamado from "./chamado";
       dados.agendamento = data;
       
       dispatch(actions.EDITAR_CHAMADOREQUEST(dados));
+      renderCalendarDays()
       // Manipule os dados que foram soltos aqui
     };
 
@@ -88,6 +90,10 @@ import Chamado from "./chamado";
       return chamadosfiltrados;
     }
 
+    const handlUpdateDay = () => {
+      setChamadosMostrar(handleUpdate(DaySelected));
+    }
+
     const renderCalendarDays = useMemo(() => {
       const calendarDays = [];
       
@@ -136,7 +142,7 @@ import Chamado from "./chamado";
               {chamadosMostrar.map(ch => {
                 let status = statuslist.find(st => st.id === ch.id_status) ?? {};
                 return (
-                  <Chamado chamado={ch} status={status.nome} key={ch.id}></Chamado>
+                  <Chamado chamado={ch} status={status.nome} key={ch.id} update={handlUpdateDay}></Chamado>
                 );
               })}
             </ContainerChamados>

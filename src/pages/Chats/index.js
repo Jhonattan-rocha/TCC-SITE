@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Chat from "../../components/chat";
+import * as actionsChats from '../../store/modules/ChatsReducer/actions';
 import { Divhome, DivListaDeChamados, DivDados, DivChat, DivChatTitle, DivSearch, DivInputSearch } from "./styled";
 import { useDispatch, useSelector } from "react-redux";
 import { BsFunnelFill, BsSearch } from "react-icons/bs";
@@ -11,6 +12,7 @@ export default function Chats(props) {
   const dispatch = useDispatch();
   const [openConfig, setOpenConfig] = React.useState(false);
   const chats = useSelector(state => state.chatreducer.chats_buscados) ?? [];
+  console.log(chats)
   const [chat, setChat] = useState(chats[0] ?? null);
   const [search, setSearch] = useState('');
 
@@ -21,6 +23,10 @@ export default function Chats(props) {
   useEffect(() => {
     handleUpdate();
   }, [chats])
+
+  useEffect(() => {
+    dispatch(actionsChats.CHATS_BUSCAR_REQUEST());
+  }, [])
 
   return (
       <Divhome>

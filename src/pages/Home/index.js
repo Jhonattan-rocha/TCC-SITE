@@ -11,8 +11,8 @@ import Line from './charts/line';
 import Example from "./charts/syncronized";
 
 export default function Home(){
-    const dispatch = useDispatch()
-    const iduser = useSelector(state => state.authreducer.user.id)
+    const dispatch = useDispatch();
+    const iduser = useSelector(state => state.authreducer.user.id);
     const qtdchamados = useSelector(state => state.chamadosreducer.procedure.result) || [];
 
     let load = qtdchamados.length > 0 ? true : false;

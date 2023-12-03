@@ -5,7 +5,7 @@ import * as actions from '../../../store/modules/chamadosreducer/actions';
 import { useDispatch } from "react-redux";
 import { edit } from './editarchamado';
 
-export default function Chamado({chamado, status}){
+export default function Chamado({chamado, status, update }){
 
     const dispatch = useDispatch()
     const [editar, setEditar] = React.useState(false);
@@ -16,7 +16,7 @@ export default function Chamado({chamado, status}){
     };
 
     function handleClick(e, id){
-        dispatch(actions.DELETAR_CHAMADO_REQUEST({id: id}))
+        dispatch(actions.DELETAR_CHAMADO_REQUEST({id: id}));
     }
 
     return (
@@ -32,7 +32,9 @@ export default function Chamado({chamado, status}){
                         <label>{chamado.operador}</label>
                     </div>
                     <div className="icons">
-                        <FaEdit onClick={() => setEditar(!editar)}></FaEdit>
+                        <FaEdit onClick={() => {
+                            setEditar(!editar);
+                        }}></FaEdit>
                         <FaTrash onClick={ (e) => handleClick(e, chamado.id)}></FaTrash>
                     </div>
                 </DivChamado>
